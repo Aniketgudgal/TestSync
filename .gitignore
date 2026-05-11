@@ -1,0 +1,48 @@
+/.metadata/
+# Maven target folder
+target/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Tomcat files
+Servers/
+work/
+temp/
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Generated WAR files
+*.war
+
+# Generated EAR files
+*.ear
+
+# Generated JAR files
+*.jar
+
+# Node modules (if frontend tools used)
+node_modules/
+
+# Environment files
+.env

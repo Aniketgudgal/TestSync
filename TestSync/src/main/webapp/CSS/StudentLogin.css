@@ -1,0 +1,87 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #f5f3ee;
+  overflow: hidden;
+}
+
+/* Main container */
+.main-box {
+  height: 100vh;
+  position: relative;
+}
+
+/* Login form */
+.login-box {
+  width: 400px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+  position: relative;
+  z-index: 2;
+}
+
+.bg-shape {
+  width: 220px;
+  height: 220px;
+
+  background: linear-gradient(orange, tomato);
+
+  border-radius: 60% 40% 60% 40%;
+
+  position: absolute;
+
+  top: 18%;
+  right: 18%;
+
+  z-index: 1;
+
+  transform: rotate(30deg);
+}
+.form-box {
+  position: relative;
+  z-index: 2;
+  border-radius: 15px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+.bg-shape2 {
+  width: 100px;
+  height: 100px;
+
+  background: linear-gradient(orange, tomato);
+
+  border-radius: 60% 40% 60% 40%;
+
+  position: absolute;
+
+  bottom: 10%;
+  left: 12%;
+
+  z-index: 1;
+
+  transform: rotate(40deg);
+}
+.col-12.mx-auto {
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .bg-shape {
+    width: 140px;
+    height: 140px;
+    top: 20%;
+    right: -40px;
+  }
+
+  .bg-shape2 {
+    width: 70px;
+    height: 70px;
+    left: -10px;
+  }
+}

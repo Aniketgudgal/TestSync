@@ -1,12 +1,14 @@
 package com.TestSync.Service;
 
-import com.TestSync.Controller.UserLoginController;
+import com.TestSync.Model.StudentModel;
+import com.TestSync.Repositry.StudentRepo;
+import com.TestSync.Repositry.StudentRepoImp;
 
 public class StudentServiceImp  implements StudentService{
-
+	StudentRepo sr = new StudentRepoImp();
 	@Override
-	public int isRegister(UserLoginController ul) {
-		return 0;
+	public int isRegister(StudentModel ul) {
+		return sr.isRegister(ul);
 	}
 
 }

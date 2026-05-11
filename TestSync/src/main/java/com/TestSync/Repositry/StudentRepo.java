@@ -1,7 +1,7 @@
 package com.TestSync.Repositry;
 
-import com.TestSync.Controller.UserLoginController;
+import com.TestSync.Model.StudentModel;
 
 public interface StudentRepo {
-	int isRegister(UserLoginController ul);
+	int isRegister(StudentModel ul);
 }

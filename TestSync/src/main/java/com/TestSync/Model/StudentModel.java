@@ -2,7 +2,12 @@ package com.TestSync.Model;
 
 import lombok.Data;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Data
+@Getter
+@Setter
 public class StudentModel {
 	private int id;
 	private String name;

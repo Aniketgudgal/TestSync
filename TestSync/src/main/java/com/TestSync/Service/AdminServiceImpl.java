@@ -2,13 +2,14 @@ package com.TestSync.Service;
 
 import com.TestSync.Model.AdminModel;
 import com.TestSync.Repositry.AdminRepository;
+import com.TestSync.Repositry.AdminRepositoryImpl;
 
-public class AdminServiceImpl implements AdminService{
-	AdminRepository adminRepository;
+public class AdminServiceImpl implements AdminService{ 
+	AdminRepositoryImpl adminRepositoryImpl = new AdminRepositoryImpl();
 	@Override
 	public boolean validateAdmin(AdminModel model) {
-		// TODO Auto-generated method stub
-		return adminRepository.isValidateAdmin(model);
+		 
+		return adminRepositoryImpl.isValidateAdmin(model);
 	}
 	
 

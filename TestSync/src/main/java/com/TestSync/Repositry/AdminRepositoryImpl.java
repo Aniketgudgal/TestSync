@@ -10,7 +10,12 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	public boolean isValidateAdmin(AdminModel model) { 
 		try {
 			pst = conn.prepareStatement("select * from admin where email = ? AND password = ?");
+			pst.setString(1, model.getEmail());
+			pst.setString(2, model.getPassword());
+			
 			rs = pst.executeQuery();
+			if(rs.next())
+				return true;
 			
 			
 		}

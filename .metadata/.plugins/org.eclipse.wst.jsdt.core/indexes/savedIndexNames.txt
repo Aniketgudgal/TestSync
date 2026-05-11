@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+D:\Tech Hub\Servlet & JSP\TestSync\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2930547089.index
-2716848756.index
-3694323004.index
-3317806098.index
-3813984034.index
-4132189711.index
-1446282378.index

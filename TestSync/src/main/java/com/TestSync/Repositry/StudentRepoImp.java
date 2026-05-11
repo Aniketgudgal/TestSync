@@ -9,7 +9,6 @@ public class StudentRepoImp extends DBConfig implements StudentRepo{
 		try
 		{
 			pst = conn.prepareStatement("select * from student where username = ? and password = ? ");
-			pst.se
 		}catch(Exception ex)
 		{
 			System.out.println("Exception in DB");

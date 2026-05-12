@@ -163,6 +163,7 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			pst = conn.prepareStatement("select e.exam_name, q.question_text, q.option1, q.option2, q.option3, q.option4, q.correct_answer from questions q inner join exam e on e.exam_id = q.exam_id");
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
+			
 			while(rs.next())
 			{
 				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)});

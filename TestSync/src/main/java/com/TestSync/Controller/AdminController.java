@@ -24,8 +24,6 @@ public class AdminController extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		 
-		
 		
 		AdminModel model = new AdminModel();
 		model.setEmail(email);
@@ -35,7 +33,7 @@ public class AdminController extends HttpServlet {
 
 		if (result) {
 			out.println(
-					"<html><body><script>" + "alert('Admin Logging Successfully....!');</script></body></html>");
+					"<html><body><script>" + "alert('Admin Logging Successfully....!'); window.location = 'AdminDashboard.html'</script></body></html>");
 		} else {
 
 			out.println("<html><body><script>"

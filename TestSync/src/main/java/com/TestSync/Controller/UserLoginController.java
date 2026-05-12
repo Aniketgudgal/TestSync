@@ -34,12 +34,14 @@ public class UserLoginController extends HttpServlet {
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("sId", id);
-			out.println("Login Success");
+			session.setAttribute("studentName", uName);
+			response.sendRedirect("StudentDashboard.html");
 		}
 		else
 		{
 			out.println("Invalid Student");
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

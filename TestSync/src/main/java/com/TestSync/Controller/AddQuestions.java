@@ -27,7 +27,7 @@ public class AddQuestions extends HttpServlet {
 		RequestDispatcher rst = request.getRequestDispatcher("AdminDashboard.html");
 		rst.include(request, response);
 		out.println("<div class = 'container'>");
-		out.println("<form action = '' method = 'GET'>");
+		out.println("<form action = 'addQuesControl' method = 'POST'>");
 
 		// start row label
 		out.println("<div class = 'row'>");
@@ -46,7 +46,7 @@ public class AddQuestions extends HttpServlet {
 		// first col-6
 		out.println("<div class = 'col-6'>");
 		// access exam data
-		out.println("<select name = 'examId' class='form-select w-25' aria-label='Default select example'>");
+		out.println("<select name = 'examId' class='form-select w-50' aria-label='Default select example'>");
 
 		AdminService admin = new AdminServiceImpl();
 		Optional<List<ExamModel>> o = admin.getExam();
@@ -117,22 +117,30 @@ public class AddQuestions extends HttpServlet {
 		out.println("</div>");
 		out.println("</div>"); // end row
 
-		// start row label
-		out.println("<div class = 'row'>");
+		
+		out.println("<div class = 'row mt-4'>");
 		// first col-6
-		out.println("<div class = 'col-6'>");
-		out.println("<label for='exam' class='col-form-label'>Correct Option</label>");
-		out.println("</div>");
-		out.println("</div>"); // end row
-
-		// input row
-		out.println("<div class = 'row'>");
-		// first col-6
-		out.println("<div class = 'col-6'>");
 		// access exam data
-		out.println("<input type='text' name = 'COP'  value = ''class='form-control'>");
+		out.println("<div class = 'col-3 form-check'>");
+		out.println("<input class='form-check-input' id = 'Op1' value = 'OP1' type='radio' name='radioValue'>");
+		out.println("<label class='form-check-label' for = 'Op1'> Option 1 </label>");
 		out.println("</div>");
-		// second col-6
+		
+		out.println("<div class = 'col-3 form-check'>");
+		out.println("<input class='form-check-input' value = 'OP2' id = 'Op2' type='radio' name='radioValue'>");
+		out.println("<label class='form-check-label' for = 'Op2'>Option 2 </label>");
+		out.println("</div>");
+		
+		out.println("<div class = 'col-3 form-check'>");
+		out.println("<input class='form-check-input' type='radio' id = 'Op3' value = 'OP3' name='radioValue'>");
+		out.println("<label class='form-check-label' for = 'Op3'>Option 3 </label>");
+		out.println("</div>");
+		
+		out.println("<div class = 'col-3 form-check'>");
+		out.println("<input class='form-check-input' type='radio' id = 'Op4' value = 'OP4' name='radioValue'>");
+		out.println("<label class='form-check-label' for = 'Op4'> Option 4 </label>");
+		out.println("</div>");
+		
 		out.println("</div>"); // end row
 
 		out.println("<div class = 'row mt-4'>");

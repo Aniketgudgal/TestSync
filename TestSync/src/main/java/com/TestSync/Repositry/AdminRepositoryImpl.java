@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
 import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.SubjectModel;
 
 public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
@@ -131,6 +132,45 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 		}catch(SQLException ex)
 		{
 			System.out.println("Problem to get Data: "+ex);
+			return Optional.empty();
+		}
+	}
+
+	@Override
+	public boolean addQuestion(QuestionModel model) {
+		try
+		{
+			pst = conn.prepareStatement("insert into questions value('0', ? , ?, ?, ?, ?, ?, ?)");
+			pst.setInt(1, model.getExamId());
+			pst.setString(2, model.getQuestionText());
+			pst.setString(3, model.getOp1());
+			pst.setString(4, model.getOp2());
+			pst.setString(5, model.getOp3());
+			pst.setString(6, model.getOp4());
+			pst.setString(7, model.getCorrectOp());
+			return pst.executeUpdate() > 0 ? true : false;
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to add question: "+ex);
+			return false;
+		}
+	}
+
+	@Override
+	public Optional<List<Object[]>> getQuestion() {
+		try
+		{
+			pst = conn.prepareStatement("select e.exam_name, q.question_text, q.option1, q.option2, q.option3, q.option4, q.correct_answer from questions q inner join exam e on e.exam_id = q.exam_id");
+			rs = pst.executeQuery();
+			List<Object[]> al = new ArrayList<>();
+			while(rs.next())
+			{
+				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)});
+			}
+			return Optional.of(al);
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to get Data of question: "+ex);
 			return Optional.empty();
 		}
 	}

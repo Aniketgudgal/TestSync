@@ -31,7 +31,6 @@ public class ViewSubject extends HttpServlet {
 	out.println("<th>Sr No</th>");
 	out.println("<th>Subject Name</th>");
 	out.println("<th>Update</th>");
-	out.println("<th>Delete</th>");
 	out.println("</tr>");
 	out.println("</thead>");
 	out.println("<tbody class = 'table-hover text-center'>");
@@ -47,7 +46,6 @@ public class ViewSubject extends HttpServlet {
 				out.println("<td>"+(count++)+"</td>");
 				out.println("<td>"+s.getName()+"</td>");
 				out.println("<td> <a href = 'UpdateSubj?id="+s.getId()+"'> <img src= 'Images/icons-update.png' alt='not found' width='30' > </a></td>");
-				out.println("<td><a href= 'DeleteSubj?id="+s.getId()+"'> <img src= 'Images/delete-icon.png' alt='not found' width='30' > </a></td>");
 				out.println("</tr>");
 			}
 		}

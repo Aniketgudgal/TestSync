@@ -15,4 +15,5 @@ public interface AdminService {
 	boolean deleteSubject(int id);
 	
 	boolean addExam(ExamModel m);
+	Optional<List<ExamModel>> getExam();
 }

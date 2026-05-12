@@ -97,4 +97,23 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 		}
 	}
 
+	@Override
+	public Optional<List<ExamModel>> getExam() {
+		try
+		{
+			pst = conn.prepareStatement("select * from exam");
+			rs = pst.executeQuery();
+			List<ExamModel> m = new ArrayList<>();
+			while(rs.next())
+			{
+				m.add(new  ExamModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
+			}
+			return Optional.of(m);
+		}catch(SQLException ex)
+		{
+			System.out.println("Exception to get exam details: "+ex);
+			return Optional.empty();
+		}
+	}
+
 }

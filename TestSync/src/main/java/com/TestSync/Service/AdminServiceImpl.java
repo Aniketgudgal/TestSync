@@ -32,6 +32,11 @@ public class AdminServiceImpl implements AdminService{
 	public boolean addExam(ExamModel m) {
 		return adminRepositoryImpl.addExam(m);
 	}
+	@Override
+	public Optional<List<ExamModel>> getExam() {
+		
+		return adminRepositoryImpl.getExam();
+	}
 	
 
 }

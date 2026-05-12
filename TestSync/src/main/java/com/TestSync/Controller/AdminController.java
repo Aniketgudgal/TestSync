@@ -35,7 +35,7 @@ public class AdminController extends HttpServlet {
 
 		if (result) {
 			out.println(
-					"<html><body><script>" + "alert('Admin Logging Successfully....!');</script></body></html>");
+					"<html><body><script>" + "alert('Admin Logging Successfully....!'); window.location = 'AdminDashboard.html'</script></body></html>");
 		} else {
 
 			out.println("<html><body><script>"

@@ -1,6 +1,7 @@
 package com.TestSync.Repositry;
 
 import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class CourseRepoImpl extends DBConfig implements CourseRepo{
 		 
 		try {
 			courseList = new ArrayList<>();
-			pst = conn.prepareStatement("select*from course");
+			pst = conn.prepareStatement("select*from subject");
 			rs = pst.executeQuery();
 			
 			while(rs.next())

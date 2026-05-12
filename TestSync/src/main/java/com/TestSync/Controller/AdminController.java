@@ -24,8 +24,6 @@ public class AdminController extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		 
-		
 		
 		AdminModel model = new AdminModel();
 		model.setEmail(email);

@@ -37,6 +37,10 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminRepositoryImpl.getExam();
 	}
+	@Override
+	public Optional<List<Object[]>> getExamWithSubject() {
+		return adminRepositoryImpl.getExamWithSubject();
+	}
 	
 
 }

@@ -116,4 +116,23 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 		}
 	}
 
+	@Override
+	public Optional<List<Object[]>> getExamWithSubject() {
+		try
+		{
+			pst = conn.prepareStatement("select e.exam_name, s.subject_name, e.total_questions, e.total_marks, e.exam_duration from exam e inner join subject s on e.subject_id = s.subject_id");
+			List<Object[]> al = new ArrayList<>();
+			rs = pst.executeQuery();
+			while(rs.next())
+			{
+				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5)});				
+			}
+			return Optional.of(al);
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to get Data: "+ex);
+			return Optional.empty();
+		}
+	}
+
 }

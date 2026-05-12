@@ -16,4 +16,5 @@ public interface AdminService {
 	
 	boolean addExam(ExamModel m);
 	Optional<List<ExamModel>> getExam();
+	Optional<List<Object[]>> getExamWithSubject();
 }

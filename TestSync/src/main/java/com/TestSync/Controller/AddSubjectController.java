@@ -19,9 +19,9 @@ public class AddSubjectController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		String subjName = request.getParameter("subjectName");
+		String subjName = request.getParameter("subjectName").trim();
 		out.println(subjName);
-		if(subjName != null)
+		if(subjName != null && subjName.length() > 1)
 		{
 			SubjectModel model = new SubjectModel();
 			model.setName(subjName);

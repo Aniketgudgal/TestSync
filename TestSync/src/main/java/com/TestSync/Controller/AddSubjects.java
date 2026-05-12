@@ -23,7 +23,7 @@ public class AddSubjects extends HttpServlet {
 		// first row
 		out.println("<div class = 'row'>");
 		out.print("<div class = 'col-3'> <input class = 'w-100 form-control' type = 'text' name = 'subjectName' value = '' placeholder = 'Enter Subject Name'></div>");
-		out.println("<div class = 'col-9'><button type = 'submit' class = 'btn btn-success'>Add Subject</button></div>");
+		out.println("<div class = 'col-9'><button type = 'submit' class = 'btn btn-primary'>Add Subject</button></div>");
 		out.println("</div>");
 		out.println("</form>");
 		out.println("</div>");

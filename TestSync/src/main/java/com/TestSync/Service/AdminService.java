@@ -22,4 +22,5 @@ public interface AdminService {
 	
 	boolean addQuestion(QuestionModel model);
 	Optional<List<Object[]>> getQuestion();
+	
 }

@@ -26,7 +26,7 @@ public class ExamSchedule extends HttpServlet {
 		rst.include(request, response);
 		out.println("<div class = 'container'>");
 		
-		out.println("<form action = '' method = 'GET'>");
+		out.println("<form action = 'addExamSchedule' method = 'GET'>");
 		out.println("<div class = 'row mt-3'>");
 		out.println("<div class = 'col-6'> <label for='ST' class='form-label'>Start Time</label> </div>");
 		out.println("<div class = 'col-6'> <label for='DT'  class='form-label'>Date</label> </div>");
@@ -34,7 +34,7 @@ public class ExamSchedule extends HttpServlet {
 		
 		out.println("<div class = 'row mt-2'>");
 		out.println("<div class = 'col-6'> <input type='time' name = 'startTime' class='form-control w-50' id='ST'> </div>");
-		out.println("<div class = 'col-6'> <input type='date' name = 'date' class='form-control w-50' id='DT'> </div>");
+		out.println("<div class = 'col-6'> <input type='date' name = 'Sdate' class='form-control w-50' id='DT'> </div>");
 		out.println("</div>");
 		
 		out.println("<div class = 'row mt-3'>");
@@ -43,7 +43,7 @@ public class ExamSchedule extends HttpServlet {
 		out.println("</div>");
 		
 		out.println("<div class = 'row mt-2'>");
-		out.println("<div class = 'col-6'><select name = 'examData' class=' w-50 form-select form-select-lg mb-3'>");
+		out.println("<div class = 'col-6'><select name = 'examId' class=' w-50 form-select form-select-lg mb-3'>");
 		AdminService as = new AdminServiceImpl();
 		Optional<List<ExamModel>> o = as.getExam();
 		if(o.isPresent())
@@ -53,7 +53,8 @@ public class ExamSchedule extends HttpServlet {
 				List<ExamModel> list = o.get();
 				for(ExamModel al: list)
 				{
-					out.println("<option value='"+al.getId()+"'>"+al.getExamName()+"</option>");
+					out.println("<option value='"+al.getId()+"-"+al.getExamDuration()+"-"+al.getSubjectId()+"'>"+al.getExamName()+"</option>");
+					System.out.println(al.getExamDuration());
 				}
 			}
 			else
@@ -67,32 +68,6 @@ public class ExamSchedule extends HttpServlet {
 		}
 		out.println("</select>");
 		out.println("</div>");
-		
-		out.println("<div class = 'col-6'> <select name = 'subjData' class=' w-50 form-select form-select-lg mb-3'>");
-		Optional<List<SubjectModel>> subj = as.getSubject();
-		if(subj.isPresent())
-		{
-			if(!subj.get().isEmpty())
-			{
-				List<SubjectModel> al = subj.get();
-				for(SubjectModel list: al)
-				{
-					out.println("<option value='"+list.getId()+"'>"+list.getName()+"</option>");
-				}
-			}
-			else
-			{
-				out.println("<option>No Subject Data Present</option>");
-			}
-		}
-		else
-		{
-			out.println("<option>No Subject Data Present</option>");
-		}
-		out.println("</select>");
-		out.println("</div>");
-		out.println("</div>");
-		
 		out.println("<div class = 'row'>");
 		out.println("<div class = 'col-4'>");
 		out.println("<button class = 'btn btn-primary' type = 'submit'>Schedule Exam</button>");

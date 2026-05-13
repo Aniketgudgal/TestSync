@@ -39,7 +39,6 @@ public class ExamSchedule extends HttpServlet {
 		
 		out.println("<div class = 'row mt-3'>");
 		out.println("<div class = 'col-6'> <label for='EX' class='form-label'>Select Exam</label> </div>");
-		out.println("<div class = 'col-6'> <label for='SS' class='form-label'>Select Subject</label> </div>");
 		out.println("</div>");
 		
 		out.println("<div class = 'row mt-2'>");
@@ -54,7 +53,6 @@ public class ExamSchedule extends HttpServlet {
 				for(ExamModel al: list)
 				{
 					out.println("<option value='"+al.getId()+"-"+al.getExamDuration()+"-"+al.getSubjectId()+"'>"+al.getExamName()+"</option>");
-					System.out.println(al.getExamDuration());
 				}
 			}
 			else

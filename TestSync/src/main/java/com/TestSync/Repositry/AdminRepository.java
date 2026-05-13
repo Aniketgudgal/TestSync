@@ -2,10 +2,12 @@ package com.TestSync.Repositry;
 
 import java.util.List;
 
+
 import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
 import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.SubjectModel;
 
@@ -21,4 +23,7 @@ public interface AdminRepository {
 	
 	boolean addQuestion(QuestionModel model);
 	Optional<List<Object[]>> getQuestion();
+	
+	boolean addExamSchedule(ExamScheduleModel model);
+	Optional<List<Object[]>> getExamSchedule();
 }

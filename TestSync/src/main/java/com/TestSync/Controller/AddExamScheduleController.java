@@ -14,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import com.TestSync.Model.ExamScheduleModel;
+import com.TestSync.Service.AdminService;
+import com.TestSync.Service.AdminServiceImpl;
 
 @WebServlet("/addExamSchedule")
 public class AddExamScheduleController extends HttpServlet {
@@ -39,14 +41,31 @@ public class AddExamScheduleController extends HttpServlet {
 		}
 		LocalTime st = LocalTime.parse(startTime);
 		LocalTime et = st.plusMinutes(dur.get());
-		out.println("<h1>"+et+"</h1>");
-		out.println(startTime);
-		out.println(Sdate);
-		out.println(examId[0]);
-		out.println(examId[1]);
 		
 		ExamScheduleModel m = new ExamScheduleModel(-1, exId.get(), subj.get(), false, st+"", et+"",Sdate);
-		
+		AdminService e = new AdminServiceImpl();
+		if(e.addExamSchedule(m))
+		{
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<script>");
+			out.println("alert('Schedule Added Successfully');");
+			out.println("window.location = 'AdminDashboard.html'");
+			out.println("</script>");
+			out.println("</body>");
+			out.println("</html>");
+		}
+		else
+		{
+			out.println("<html>");
+			out.println("<body>");
+			out.println("<script>");
+			out.println("alert('Problem to add Exam Schedule');");
+			out.println("window.location = 'AdminDashboard.html'");
+			out.println("</script>");
+			out.println("</body>");
+			out.println("</html>");
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

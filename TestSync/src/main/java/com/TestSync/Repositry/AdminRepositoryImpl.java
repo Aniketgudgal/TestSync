@@ -31,8 +31,6 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 				 
 				 return adminModel;
 			}
-				 
-			
 			
 		}
 		catch (SQLException e) { 
@@ -219,17 +217,18 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	public boolean addExamSchedule(ExamScheduleModel model) {
 		try
 		{
-			pst = conn.prepareStatement("insert into examschedule(exam_id, subject_id, start_time, end_time, date) values(?, ?, ?, ?, ?)");
+			pst = conn.prepareStatement("insert into examschedule(exam_id, subject_id, start_time, end_time, date, course_id) values(?, ?, ?, ?, ?,?)");
 			pst.setInt(1, model.getExamId());
 			pst.setInt(2, model.getSubjectId());
 			pst.setString(3, model.getStartTime());
 			pst.setString(4, model.getEndTime());
 			pst.setString(5, model.getDate());
+			pst.setInt(6, model.getCourseId());
 			
 			return pst.executeUpdate() > 0 ? true: false;
 		}catch(SQLException ex)
 		{
-			System.out.println("Problem to add exam schedule");
+			System.out.println("Problem to add exam schedule: "+ex);
 			return false;
 		}
 	}
@@ -238,12 +237,12 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	public Optional<List<Object[]>> getExamSchedule() {
 		try
 		{
-			pst = conn.prepareStatement("select e.exam_name, s.subject_name, es.start_time, es.end_time, es.date from examschedule es inner join exam e on e.exam_id = es.exam_id inner join subject s on s.subject_id = es.subject_id");
+			pst = conn.prepareStatement("select e.exam_name, s.subject_name, c.course_name, es.start_time, es.end_time, es.date from examschedule es inner join exam e on e.exam_id = es.exam_id inner join subject s on s.subject_id = es.subject_id inner join course c on c.course_id = es.course_id");
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
 			while(rs.next())
 			{
-				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
 			}
 			return Optional.of(al);
 		}catch(SQLException ex)

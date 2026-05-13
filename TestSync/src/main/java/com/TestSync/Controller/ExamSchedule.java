@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.TestSync.Service.AdminServiceImpl;
+import com.TestSync.Service.CourseService;
+import com.TestSync.Service.CourseServiceImpl;
+import com.TestSync.Model.CourseModel;
 import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.SubjectModel;
 import com.TestSync.Service.AdminService;
@@ -39,6 +42,7 @@ public class ExamSchedule extends HttpServlet {
 		
 		out.println("<div class = 'row mt-3'>");
 		out.println("<div class = 'col-6'> <label for='EX' class='form-label'>Select Exam</label> </div>");
+		out.println("<div class = 'col-6'> <label for='CO' class='form-label'>Select Course</label> </div>");
 		out.println("</div>");
 		
 		out.println("<div class = 'row mt-2'>");
@@ -66,9 +70,33 @@ public class ExamSchedule extends HttpServlet {
 		}
 		out.println("</select>");
 		out.println("</div>");
+		out.println("<div class = 'col-6'><select name = 'courseId' class=' w-50 form-select form-select-lg mb-3'>");
+		CourseService cs = new CourseServiceImpl();
+		Optional<List<CourseModel>> cm = cs.getAllCourses();
+		if(o.isPresent())
+		{
+			List<CourseModel> list = cm.get();
+			if(!list.isEmpty())
+			{
+				for(CourseModel model: list)
+				{
+					out.println("<option value='"+model.getCourseId()+"'>"+model.getCourseName()+"</option>");
+				}
+			}
+			else
+			{
+				out.println("<option>No Course Data Present</option>");
+			}
+		}
+		else
+		{
+			out.println("<option>No Course Data Present</option>");
+		}
+		out.println("</select>");
+		out.println("</div>");
 		out.println("<div class = 'row'>");
 		out.println("<div class = 'col-4'>");
-		out.println("<button class = 'btn btn-primary' type = 'submit'>Schedule Exam</button>");
+		out.println("<button class = 'btn btn-primary' onclick = 'return addSchedule()' type = 'submit'>Schedule Exam</button>");
 		out.println("</div></div>");
 		
 		out.println("</form>");

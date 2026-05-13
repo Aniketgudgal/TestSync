@@ -15,10 +15,7 @@ import com.TestSync.Service.CourseService;
 import com.TestSync.Service.CourseServiceImpl;
 import com.mysql.cj.xdevapi.DatabaseObject.DbObjectType;
 
-/**
- * Servlet implementation class GetCourseController
- */
-@WebServlet("/GetCourseController")
+@WebServlet("/getCourseController")
 public class CourseController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -30,21 +27,23 @@ public class CourseController extends HttpServlet {
 		 if(optionalList.isPresent())
 		 {
 			 List<CourseModel> list = optionalList.get();
-			 
+			 if(!list.isEmpty())
+			 {
 			 for(CourseModel c:list)
 			 {
 				 out.println("<option value='"+c.getCourseId()+"'>"+c.getCourseName()+"</option>");
+			 }
+			 }
+			 else
+			 {
+				 out.println("<option value = ''>No Course Present</option>");
 			 }
 		 }
 		
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

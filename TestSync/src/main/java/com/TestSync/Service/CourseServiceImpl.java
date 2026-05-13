@@ -10,7 +10,6 @@ public class CourseServiceImpl implements CourseService{
 	CourseRepoImpl c = new CourseRepoImpl();
 	@Override
 	public Optional<List<CourseModel>> getAllCourses() {
-		
 		return c.getAllCourses();
 	} 
 

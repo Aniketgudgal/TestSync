@@ -2,6 +2,8 @@ package com.TestSync.Repositry;
 
 import java.sql.PreparedStatement;
 
+
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +14,12 @@ import javax.imageio.plugins.tiff.ExifGPSTagSet;
 import com.TestSync.Model.CourseModel;
 
 public class CourseRepoImpl extends DBConfig implements CourseRepo{
-	List<CourseModel> courseList;
 	@Override
 	public Optional<List<CourseModel>> getAllCourses() {
 		 
 		try {
-			courseList = new ArrayList<>();
-			pst = conn.prepareStatement("select*from subject");
+			List<CourseModel> courseList = new ArrayList<>();
+			pst = conn.prepareStatement("select*from course");
 			rs = pst.executeQuery();
 			
 			while(rs.next())
@@ -28,14 +29,14 @@ public class CourseRepoImpl extends DBConfig implements CourseRepo{
 				model.setCourseName(rs.getString(2));
 				courseList.add(model);
 			}
-			return Optional.empty();
+			return Optional.of(courseList);
 			
 		}
 		catch(SQLException e)
 		{
 			System.out.println("error is "+e);
 		}
-		return null;
+		return Optional.empty();
 	}
 
 }

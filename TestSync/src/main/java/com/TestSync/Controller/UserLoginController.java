@@ -42,7 +42,6 @@ public class UserLoginController extends HttpServlet {
 		{
 			out.println("Invalid Student");
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

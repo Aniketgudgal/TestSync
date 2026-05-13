@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
 import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.SubjectModel;
 
 public interface AdminService {
@@ -18,4 +19,7 @@ public interface AdminService {
 	boolean addExam(ExamModel m);
 	Optional<List<ExamModel>> getExam();
 	Optional<List<Object[]>> getExamWithSubject();
+	
+	boolean addQuestion(QuestionModel model);
+	Optional<List<Object[]>> getQuestion();
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
 import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.SubjectModel;
 import com.TestSync.Repositry.AdminRepository;
 import com.TestSync.Repositry.AdminRepositoryImpl;
@@ -40,6 +41,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Optional<List<Object[]>> getExamWithSubject() {
 		return adminRepositoryImpl.getExamWithSubject();
+	}
+	@Override
+	public boolean addQuestion(QuestionModel model) {
+		return adminRepositoryImpl.addQuestion(model);
+	}
+	@Override
+	public Optional<List<Object[]>> getQuestion() {
+		
+		return adminRepositoryImpl.getQuestion();
 	}
 	
 

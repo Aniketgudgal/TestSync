@@ -13,7 +13,7 @@ import com.TestSync.Repositry.AdminRepositoryImpl;
 public class AdminServiceImpl implements AdminService{ 
 	AdminRepositoryImpl adminRepositoryImpl = new AdminRepositoryImpl();
 	@Override
-	public boolean validateAdmin(AdminModel model) {
+	public AdminModel validateAdmin(AdminModel model) {
 		 
 		return adminRepositoryImpl.isValidateAdmin(model);
 	}

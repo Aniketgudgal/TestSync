@@ -28,6 +28,7 @@ public class StudentRegisterController extends HttpServlet {
 			String email = request.getParameter("email");
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
+			int courseId = Integer.parseInt(request.getParameter("subjectId"));
 			String mobile = request.getParameter("mobile");
 			
 		}

@@ -44,12 +44,10 @@ public class AdminServiceImpl implements AdminService{
 		return adminRepositoryImpl.getExamWithSubject();
 	}
 	@Override
-<<<<<<< HEAD
 	public Optional<List<Object[]>> getAllStudents(){
 		return adminRepositoryImpl.getAllStudents();
 	}
 
-=======
 	public boolean addQuestion(QuestionModel model) {
 		return adminRepositoryImpl.addQuestion(model);
 	}
@@ -58,7 +56,6 @@ public class AdminServiceImpl implements AdminService{
 		
 		return adminRepositoryImpl.getQuestion();
 	}
->>>>>>> 5be21af387e95bc1f611da4a4d7d02ff5580e63a
 	
 
 }

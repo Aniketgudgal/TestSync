@@ -18,11 +18,9 @@ public interface AdminRepository {
 	
 	Optional<List<ExamModel>> getExam();
 	Optional<List<Object[]>> getExamWithSubject();
-<<<<<<< HEAD
 	public Optional<List<Object[]>> getAllStudents();
-=======
+ 
 	
 	boolean addQuestion(QuestionModel model);
 	Optional<List<Object[]>> getQuestion();
->>>>>>> 5be21af387e95bc1f611da4a4d7d02ff5580e63a
 }

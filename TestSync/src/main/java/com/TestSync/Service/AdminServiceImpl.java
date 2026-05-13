@@ -11,6 +11,7 @@ import com.TestSync.Repositry.AdminRepositoryImpl;
 
 public class AdminServiceImpl implements AdminService{ 
 	AdminRepositoryImpl adminRepositoryImpl = new AdminRepositoryImpl();
+	
 	@Override
 	public AdminModel validateAdmin(AdminModel model) {
 		 
@@ -41,6 +42,11 @@ public class AdminServiceImpl implements AdminService{
 	public Optional<List<Object[]>> getExamWithSubject() {
 		return adminRepositoryImpl.getExamWithSubject();
 	}
+	@Override
+	public Optional<List<Object[]>> getAllStudents(){
+		return adminRepositoryImpl.getAllStudents();
+	}
+
 	
 
 }

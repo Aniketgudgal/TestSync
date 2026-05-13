@@ -6,41 +6,35 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
-import com.TestSync.Model.AdminModel;
+import com.TestSync.Model.StudentModel;
 import com.TestSync.Service.AdminService;
 import com.TestSync.Service.AdminServiceImpl;
+import com.TestSync.Service.StudentService;
+import com.TestSync.Service.StudentServiceImp;
 
 /**
- * Servlet implementation class ViewAdminData
+ * Servlet implementation class ManageStudent
  */
-@WebServlet("/viewadmin")
-public class ViewAdminData extends HttpServlet {
+@WebServlet("/managestudent")
+public class ManageStudent extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		RequestDispatcher r = request.getRequestDispatcher("AdminDashboard.html");
 		r.include(request, response);
-
-		// get admin data from session
-		HttpSession session = request.getSession();
-		String adminName = (String) session.getAttribute("adminName");
-		String email = (String) session.getAttribute("adminEmail");
-		String password = (String) session.getAttribute("password");
 		out.println("<div class='container mt-4'>");
 
 		out.println("<div class='card shadow-lg'>");
 		out.println("<div class='card-header bg-dark text-white text-center'>");
-		out.println("<h4>Admin Profile</h4>");
+		out.println("<h4>Manage Student</h4>");
 		out.println("</div>");
 
 		out.println("<div class='card-body p-0'>");
@@ -50,9 +44,12 @@ public class ViewAdminData extends HttpServlet {
 
 		out.println("<thead class='table-dark'>");
 		out.println("<tr>");
-		out.println("<th>ADMIN NAME</th>");
+		out.println("<th>SR NO</th>");
+		out.println("<th>STUDENT NAME</th>");
 		out.println("<th>EMAIL</th>");
-		out.println("<th>PASSWORD</th>");
+		out.println("<th>USERNAME</th>");
+		out.println("<th>COURSE</th>");
+		out.println("<th>MOBILE NO</th>");
 		out.println("<th>UPDATE</th>");
 		out.println("</tr>");
 		out.println("</thead>");
@@ -60,26 +57,45 @@ public class ViewAdminData extends HttpServlet {
 		out.println("<tbody>");
 		out.println("<tr>");
 
-		out.println("<td>" + adminName + "</td>");
-		out.println("<td>" + email + "</td>");
-		out.println("<td>" + password + "</td>");
+		AdminService adminService = new AdminServiceImpl();
+		Optional<List<Object[]>> list = adminService.getAllStudents();
+		int count = 0;
 
-		out.println("<td>");
-		out.println("<a href='#' class='btn btn-warning btn-sm'>");
-		out.println("Edit");
-		out.println("</a>");
-		out.println("</td>");
+		if (list.isPresent() && !list.get().isEmpty()) {
 
-		out.println("</tr>");
+			for (Object obj[] : list.get()) {
+				System.out.println(obj);
+				count++;
+
+				out.println("<tr>");
+
+				out.println("<td>" + count++ + "</td>");
+				out.println("<td>" + obj[0] + "</td>");
+				out.println("<td>" + obj[1] + "</td>");
+				out.println("<td>" + obj[2] + "</td>");
+				out.println("<td>" + obj[3] + "</td>");
+				out.println("<td>" + obj[4] + "</td>");
+
+				out.println("<td>");
+				out.println("<a href='#' class='btn btn-warning btn-sm'>");
+				out.println("Edit");
+				out.println("</a>");
+				out.println("</td>");
+
+				out.println("</tr>");
+			}
+		} else {
+
+			out.println("<tr>");
+			out.println("<td colspan='8' class='text-danger'>No Record Found</td>");
+			out.println("</tr>");
+		}
 		out.println("</tbody>");
-
 		out.println("</table>");
 		out.println("</div>");
-
 		out.println("</div>");
 		out.println("</div>");
 		out.println("</div>");
-
 	}
 
 	/**

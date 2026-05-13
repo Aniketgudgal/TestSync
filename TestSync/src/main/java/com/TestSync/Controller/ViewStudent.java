@@ -12,13 +12,13 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class Studentview
  */
-@WebServlet("/Studentview")
-public class StudentView extends HttpServlet {
+@WebServlet("/viewstudent")
+public class ViewStudent extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/httml");
 		PrintWriter out = response.getWriter();
 		
-		RequestDispatcher r = request.getRequestDispatcher("Home.html");
+		RequestDispatcher r = request.getRequestDispatcher("StudentDashboard.html");
 		r.include(request, response);
 		
 		

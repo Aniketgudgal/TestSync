@@ -17,4 +17,5 @@ public interface AdminRepository {
 	
 	Optional<List<ExamModel>> getExam();
 	Optional<List<Object[]>> getExamWithSubject();
+	public Optional<List<Object[]>> getAllStudents();
 }

@@ -10,6 +10,7 @@ import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.SubjectModel;
 
 public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
+	private List<Object[]> list;
 	@Override
 	public AdminModel isValidateAdmin(AdminModel model) { 
 		try {
@@ -142,6 +143,34 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			System.out.println("Problem to get Data: "+ex);
 			return Optional.empty();
 		}
+	}
+	
+	@Override
+	public Optional<List<Object[]>> getAllStudents() {
+		 try {
+			 list = new ArrayList<>();
+			 pst = conn.prepareStatement("select st.student_name,st.email,st.username,sub.subject_name,st.mobile from student st Left join subject sub on st.course_id = sub.subject_id");
+			 rs = pst.executeQuery();
+			 
+			 while(rs.next())
+			 { 
+				 Object[] obj = new Object[5];
+				 
+				 	obj[0] = rs.getString(1); // name
+		            obj[1] = rs.getString(2); // email
+		            obj[2] = rs.getString(3); // username
+		            obj[3] = rs.getString(4); // subject name
+		            obj[4] = rs.getString(5); // mobile
+				 list.add(obj);
+			 }
+			 return Optional.of(list);
+			 
+		 } catch(SQLException e)
+		 {
+			 System.out.println("Repository erro  "+e);
+			 return Optional.empty();
+		 }
+		
 	}
 
 }

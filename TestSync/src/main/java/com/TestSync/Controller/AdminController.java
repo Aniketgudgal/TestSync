@@ -38,6 +38,7 @@ public class AdminController extends HttpServlet {
 			session.setAttribute("adminId", admin.getId());
 			session.setAttribute("adminName", admin.getName());
 			session.setAttribute("adminEmail", admin.getEmail());
+			session.setAttribute("password", admin.getPassword());
 			out.println("<html><body><script>"
 					+ "alert('Admin Logging Successfully....!'); </script></body></html>");
 			response.sendRedirect("admindashboard");

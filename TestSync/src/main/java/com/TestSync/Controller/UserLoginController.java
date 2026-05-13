@@ -35,6 +35,7 @@ public class UserLoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("sId", id);
 			session.setAttribute("studentName", uName);
+			 
 			response.sendRedirect("StudentDashboard.html");
 		}
 		else

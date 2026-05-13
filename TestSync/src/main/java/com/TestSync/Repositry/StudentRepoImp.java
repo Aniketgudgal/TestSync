@@ -1,9 +1,14 @@
 package com.TestSync.Repositry;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import com.TestSync.Model.StudentModel;
 
 public class StudentRepoImp extends DBConfig implements StudentRepo{
-
+	
 	@Override
 	public int isRegister(StudentModel ul) {
 		try
@@ -27,5 +32,7 @@ public class StudentRepoImp extends DBConfig implements StudentRepo{
 		}
 		return -1;
 	}
+
+	
 
 }

@@ -9,11 +9,19 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
+<!-- Bootstrap Icons -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <style>
 body {
 	background: linear-gradient(to right, #74ebd5, #ACB6E5);
-	height: 100vh;
 	margin: 0;
+	min-height: 100vh;
+}
+
+.login-container {
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -27,10 +35,27 @@ body {
 	box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
 	width: 100%;
 	max-width: 400px;
+	position: relative;
+}
+
+.back-btn {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 24px;
+	color: white;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.back-btn:hover {
+	color: #dcdcdc;
+	transform: translateX(-5px);
 }
 
 .login-card h2 {
 	font-weight: bold;
+	margin-top: 20px;
 }
 
 .form-control {
@@ -40,7 +65,7 @@ body {
 }
 
 .form-control:focus {
-	box-shadow: 0 0 10px rgba(255,255,255,0.5);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .btn-light {
@@ -57,42 +82,34 @@ body {
 
 </head>
 
-<body> 
+<body>
 
-	<div class="container d-flex justify-content-center align-items-center">
+	<div class="container login-container">
 
-		<div class="col-12 col-sm-10 col-md-6 col-lg-4">
+		<div class="row justify-content-center w-100">
 
-			<div class="login-card">
+			<div class="col-12 col-sm-10 col-md-6 col-lg-4">
 
-				<h2 class="text-center mb-4">
-					Admin Login Here
-				</h2>
+				<div class="login-card">
 
-				<form action="validateadmin" method="post">
+				 
+					<a href="Home.html" class="back-btn"> <i
+						class="bi bi-arrow-left-circle-fill"></i>
+					</a>
 
-					<input type="email"
-						name="email"
-						placeholder="Enter email"
-						class="form-control mb-3"
-						required>
+					<h2 class="text-center mb-4">Admin Login Here</h2>
 
-					<input type="password"
-						name="password"
-						placeholder="Enter Password"
-						class="form-control mb-4"
-						required>
+					<form action="validateadmin" method="post">
 
-					<div class="d-flex justify-content-center">
+						<input type="email" name="email" placeholder="Enter Email"
+							class="form-control mb-3" required> <input
+							type="password" name="password" placeholder="Enter Password"
+							class="form-control mb-4" required> <input type="submit"
+							value="Login" class="btn btn-light">
 
-						<input type="submit"
-							name="s"
-							value="Login"
-							class="btn btn-light px-4">
+					</form>
 
-					</div>
-
-				</form>
+				</div>
 
 			</div>
 
@@ -101,7 +118,8 @@ body {
 	</div>
 
 	<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+		
 	</script>
 
 </body>

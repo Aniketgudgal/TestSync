@@ -11,7 +11,7 @@ import com.TestSync.Model.SubjectModel;
 
 public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	@Override
-	public boolean isValidateAdmin(AdminModel model) { 
+	public AdminModel isValidateAdmin(AdminModel model) { 
 		try {
 			pst = conn.prepareStatement("select * from admin where email = ? AND password = ?");
 			pst.setString(1, model.getEmail());
@@ -19,14 +19,23 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			
 			rs = pst.executeQuery();
 			if(rs.next())
-				return true;
+			{
+				AdminModel adminModel = new AdminModel();
+				 adminModel.setId(rs.getInt(1));
+				 adminModel.setName(rs.getString(2));
+				 adminModel.setEmail(rs.getString(3));
+				 adminModel.setPassword(rs.getString(4));
+				 
+				 return adminModel;
+			}
+				 
 			
 			
 		}
 		catch (SQLException e) { 
 			System.out.println("Erro is "+e);
 		}
-		return false;
+		return null;
 	}
 
 	@Override

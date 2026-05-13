@@ -8,30 +8,28 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class GetAdminSessionData
  */
-@WebServlet("/logout")
-public class LogoutController extends HttpServlet {
+@WebServlet("/getadminsessiondata")
+public class GetAdminSessionData extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out=response.getWriter();
-		HttpSession session = request.getSession();
 
-		if (session != null) {
-			session.invalidate();
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("adminName") != null) {
+
+			String adminName = (String) session.getAttribute("adminName");
+			response.getWriter().write(adminName);
 		}
-		
-		response.sendRedirect("Home.html");
+		else {
+			response.getWriter().write("Not Logged In");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub

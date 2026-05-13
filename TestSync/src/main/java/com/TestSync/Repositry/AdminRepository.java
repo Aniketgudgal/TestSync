@@ -9,7 +9,7 @@ import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.SubjectModel;
 
 public interface AdminRepository {
-	public boolean isValidateAdmin(AdminModel model);
+	public AdminModel isValidateAdmin(AdminModel model);
 	public boolean addSubject(SubjectModel m);
 	Optional<List<SubjectModel>> getSubject();
 	boolean deleteSubject(int id);

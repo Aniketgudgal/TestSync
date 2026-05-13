@@ -10,23 +10,20 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Servlet implementation class GetStudentSessionData
+ * Servlet implementation class AdminDashboardController
  */
-@WebServlet("/getstudentsession")
-public class GetStudentSessionData extends HttpServlet {
+@WebServlet("/admindashboard")
+public class AdminDashboardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
 		response.setContentType("text/html");
-	
 		HttpSession session = request.getSession(false);
-		if(session != null && session.getAttribute("studentName") != null)
+		if(session == null || session.getAttribute("adminId") == null)
 		{
-			String studentName = (String)session.getAttribute("studentName");
-			response.getWriter().write(studentName);	 
+			response.sendRedirect("AdminLogin.html");
+			return;
 		}
-		else {
-			response.getWriter().write("Not Logged In");
-		}
-		
+		request.getRequestDispatcher("AdminDashboard.html").forward(request,response);
 	}
 
 	/**

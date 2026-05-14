@@ -219,17 +219,18 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	public boolean addExamSchedule(ExamScheduleModel model) {
 		try
 		{
-			pst = conn.prepareStatement("insert into examschedule(exam_id, subject_id, start_time, end_time, date) values(?, ?, ?, ?, ?)");
+			pst = conn.prepareStatement("insert into examschedule(exam_id, subject_id, start_time, end_time, date, course_id) values(?, ?, ?, ?, ?,?)");
 			pst.setInt(1, model.getExamId());
 			pst.setInt(2, model.getSubjectId());
 			pst.setString(3, model.getStartTime());
 			pst.setString(4, model.getEndTime());
 			pst.setString(5, model.getDate());
+			pst.setInt(6, model.getCourseId());
 			
 			return pst.executeUpdate() > 0 ? true: false;
 		}catch(SQLException ex)
 		{
-			System.out.println("Problem to add exam schedule");
+			System.out.println("Problem to add exam schedule: "+ex);
 			return false;
 		}
 	}
@@ -252,5 +253,4 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			return Optional.empty();
 		}
 	}
-
 }

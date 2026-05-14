@@ -13,6 +13,23 @@ public class StudentServiceImp  implements StudentService{
 	public int isRegister(StudentModel ul) {
 		return sr.isRegister(ul);
 	}
+	@Override
+	public Optional<List<Object[]>> getExamScheduleInfoPending(int id) {
+		return sr.getExamScheduleInfoPending(id);
+	}
+	
+	@Override
+	public Optional<List<Object[]>> getExamScheduleInfoCompleted(int id) {
+		return sr.getExamScheduleInfoCompleted(id);
+	}
+	@Override
+	public Optional<String> getStartTime(int id) {
+		return sr.getStartTime(id);
+	}
+	@Override
+	public void updateAttempt() {
+		sr.updateAttempt();
+	}
 	
 	
 }

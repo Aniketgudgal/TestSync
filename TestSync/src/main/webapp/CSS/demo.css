@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.disable-btn{
+    background-color: gray;
+    color: white;
+}
+
+.enable-btn{
+    background-color: green;
+    color: white;
+}

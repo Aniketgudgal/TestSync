@@ -15,4 +15,5 @@ public class ExamScheduleModel {
 	private String startTime;
 	private String endTime;
 	private String date;
+	private int courseId;
 }

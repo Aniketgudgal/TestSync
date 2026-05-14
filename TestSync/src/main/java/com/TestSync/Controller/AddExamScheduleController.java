@@ -19,55 +19,74 @@ import com.TestSync.Service.AdminServiceImpl;
 
 @WebServlet("/addExamSchedule")
 public class AddExamScheduleController extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String startTime = request.getParameter("startTime");
 		String Sdate = request.getParameter("Sdate");
 		String[] examId = request.getParameter("examId").split("-");
+		String cId = request.getParameter("CourId");
 		Optional<Integer> dur = Optional.empty();
 		Optional<Integer> subj = Optional.empty();
 		Optional<Integer> exId = Optional.empty();
-		try
-		{
+		Optional<Integer> courId = Optional.empty();
+		try {
+			courId = Optional.of(Integer.parseInt(cId.trim()));
 			exId = Optional.of(Integer.parseInt(examId[0].trim()));
 			dur = Optional.of(Integer.parseInt(examId[1].trim()));
 			subj = Optional.of(Integer.parseInt(examId[2].trim()));
-			
-		}catch(NumberFormatException ex)
-		{
-			System.out.println("Problem to convert time: "+ex);
+
+		} catch (NumberFormatException ex) {
+			System.out.println("Problem to convert time: " + ex);
 		}
-		LocalTime st = LocalTime.parse(startTime);
-		LocalTime et = st.plusMinutes(dur.get());
-		
-		ExamScheduleModel m = new ExamScheduleModel(-1, exId.get(), subj.get(), false, st+"", et+"",Sdate);
-		AdminService e = new AdminServiceImpl();
-		if(e.addExamSchedule(m))
-		{
+		Optional<LocalTime> st = Optional.empty();
+		Optional<LocalTime> et = Optional.empty();
+		try {
+			st = Optional.of(LocalTime.parse(startTime));
+			et = Optional.of(st.get().plusMinutes(dur.get()));
+		} catch (Exception ex) {
+			System.out.println("Problem to convert time: " + ex);
+		}
+		if (st.isPresent() && et.isPresent()) {
+			ExamScheduleModel m = new ExamScheduleModel(-1, exId.get(), subj.get(), false, java.sql.Time.valueOf(st.get()).toString(), java.sql.Time.valueOf(et.get()).toString(), Sdate,
+					courId.get());
+			AdminService e = new AdminServiceImpl();
+			if (e.addExamSchedule(m)) {
+				out.println("<html>");
+				out.println("<body>");
+				out.println("<script>");
+				out.println("alert('Schedule Added Successfully');");
+				out.println("window.location = 'AdminDashboard.html'");
+				out.println("</script>");
+				out.println("</body>");
+				out.println("</html>");
+			} else {
+				out.println("<html>");
+				out.println("<body>");
+				out.println("<script>");
+				out.println("alert('Problem to add Exam Schedule');");
+				out.println("window.location = 'AdminDashboard.html'");
+				out.println("</script>");
+				out.println("</body>");
+				out.println("</html>");
+			}
+		} else {
 			out.println("<html>");
 			out.println("<body>");
 			out.println("<script>");
-			out.println("alert('Schedule Added Successfully');");
+			out.println("alert('Invalid Data');");
 			out.println("window.location = 'AdminDashboard.html'");
 			out.println("</script>");
 			out.println("</body>");
 			out.println("</html>");
 		}
-		else
-		{
-			out.println("<html>");
-			out.println("<body>");
-			out.println("<script>");
-			out.println("alert('Problem to add Exam Schedule');");
-			out.println("window.location = 'AdminDashboard.html'");
-			out.println("</script>");
-			out.println("</body>");
-			out.println("</html>");
-		}
+
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

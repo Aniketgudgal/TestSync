@@ -8,5 +8,5 @@ import com.TestSync.Model.CourseModel;
 public interface CourseService {
 	
 	public Optional<List<CourseModel>> getAllCourses();
-
+	
 }

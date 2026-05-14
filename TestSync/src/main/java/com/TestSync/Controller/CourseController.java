@@ -15,7 +15,7 @@ import com.TestSync.Service.CourseService;
 import com.TestSync.Service.CourseServiceImpl;
 import com.mysql.cj.xdevapi.DatabaseObject.DbObjectType;
 
-@WebServlet("/GetCourseController")
+@WebServlet("/getCourseController")
 public class CourseController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");

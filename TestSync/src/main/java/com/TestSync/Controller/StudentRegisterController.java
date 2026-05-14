@@ -30,7 +30,6 @@ public class StudentRegisterController extends HttpServlet {
 			String password = request.getParameter("password");
 			int courseId = Integer.parseInt(request.getParameter("subjectId"));
 			String mobile = request.getParameter("mobile");
-			
 		}
 		
 	}

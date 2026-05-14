@@ -15,9 +15,6 @@ import com.TestSync.Service.CourseService;
 import com.TestSync.Service.CourseServiceImpl;
 import com.mysql.cj.xdevapi.DatabaseObject.DbObjectType;
 
-/**
- * Servlet implementation class GetCourseController
- */
 @WebServlet("/GetCourseController")
 public class CourseController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,15 +33,9 @@ public class CourseController extends HttpServlet {
 				 out.println("<option value='"+c.getCourseId()+"'>"+c.getCourseName()+"</option>");
 			 }
 		 }
-		
-		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -15,4 +15,5 @@ public interface StudentService {
 	Optional<String> getStartTime(int id);
 	
 	void updateAttempt();
+	public boolean idAddedRecord(StudentModel model);
 }

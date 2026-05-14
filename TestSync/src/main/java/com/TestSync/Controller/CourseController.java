@@ -27,10 +27,16 @@ public class CourseController extends HttpServlet {
 		 if(optionalList.isPresent())
 		 {
 			 List<CourseModel> list = optionalList.get();
-			 
+			 if(!list.isEmpty())
+			 {
 			 for(CourseModel c:list)
 			 {
 				 out.println("<option value='"+c.getCourseId()+"'>"+c.getCourseName()+"</option>");
+			 }
+			 }
+			 else
+			 {
+				 out.println("<option value = ''>No Course Present</option>");
 			 }
 		 }
 	}

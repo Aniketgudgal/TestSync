@@ -65,6 +65,4 @@ public class AdminServiceImpl implements AdminService{
 	public Optional<List<Object[]>> getExamSchedule() {
 		return adminRepositoryImpl.getExamSchedule();
 	}
-	
-
 }

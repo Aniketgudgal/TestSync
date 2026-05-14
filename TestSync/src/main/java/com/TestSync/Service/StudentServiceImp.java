@@ -30,6 +30,8 @@ public class StudentServiceImp  implements StudentService{
 	public void updateAttempt() {
 		sr.updateAttempt();
 	}
-	
-	
+	public boolean idAddedRecord(StudentModel model) {
+		// TODO Auto-generated method stub
+		return sr.registerStudent(model);
+	}
 }

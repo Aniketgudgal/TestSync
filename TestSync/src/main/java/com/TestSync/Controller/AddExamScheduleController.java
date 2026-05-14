@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 import com.TestSync.Model.ExamScheduleModel;
@@ -27,33 +28,41 @@ public class AddExamScheduleController extends HttpServlet {
 		String startTime = request.getParameter("startTime");
 		String Sdate = request.getParameter("Sdate");
 		String[] examId = request.getParameter("examId").split("-");
-		String cId = request.getParameter("CourId");
+		String courseId = request.getParameter("courseId");
 		Optional<Integer> dur = Optional.empty();
 		Optional<Integer> subj = Optional.empty();
 		Optional<Integer> exId = Optional.empty();
 		Optional<Integer> courId = Optional.empty();
-		try {
-			courId = Optional.of(Integer.parseInt(cId.trim()));
+
+		try
+		{
 			exId = Optional.of(Integer.parseInt(examId[0].trim()));
 			dur = Optional.of(Integer.parseInt(examId[1].trim()));
 			subj = Optional.of(Integer.parseInt(examId[2].trim()));
-
-		} catch (NumberFormatException ex) {
-			System.out.println("Problem to convert time: " + ex);
+			courId = Optional.of(Integer.parseInt(courseId.trim()));
+			
+		}catch(NumberFormatException ex)
+		{
+			System.out.println("Problem to convert time: "+ex);
 		}
 		Optional<LocalTime> st = Optional.empty();
 		Optional<LocalTime> et = Optional.empty();
-		try {
+		try
+		{
 			st = Optional.of(LocalTime.parse(startTime));
 			et = Optional.of(st.get().plusMinutes(dur.get()));
-		} catch (Exception ex) {
-			System.out.println("Problem to convert time: " + ex);
+		}catch(DateTimeParseException ex)
+		{
+			System.out.println("Problem to Convert Date"+ex);
 		}
-		if (st.isPresent() && et.isPresent()) {
-			ExamScheduleModel m = new ExamScheduleModel(-1, exId.get(), subj.get(), false, java.sql.Time.valueOf(st.get()).toString(), java.sql.Time.valueOf(et.get()).toString(), Sdate,
-					courId.get());
+		
+		
+		if((!startTime.isEmpty()) && (!Sdate.isEmpty()) && exId.isPresent() && dur.isPresent() && subj.isPresent() && st.isPresent() && et.isPresent())
+		{
+			ExamScheduleModel m = new ExamScheduleModel(-1, exId.get(), subj.get(), false, st.get()+"", et.get()+"",Sdate,courId.get());
 			AdminService e = new AdminServiceImpl();
-			if (e.addExamSchedule(m)) {
+			if(e.addExamSchedule(m))
+			{
 				out.println("<html>");
 				out.println("<body>");
 				out.println("<script>");
@@ -72,7 +81,9 @@ public class AddExamScheduleController extends HttpServlet {
 				out.println("</body>");
 				out.println("</html>");
 			}
-		} else {
+		}
+		else
+		{
 			out.println("<html>");
 			out.println("<body>");
 			out.println("<script>");
@@ -82,7 +93,6 @@ public class AddExamScheduleController extends HttpServlet {
 			out.println("</body>");
 			out.println("</html>");
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

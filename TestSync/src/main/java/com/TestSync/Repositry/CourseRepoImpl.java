@@ -2,6 +2,8 @@ package com.TestSync.Repositry;
 
 import java.sql.PreparedStatement;
 
+
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,6 @@ import javax.imageio.plugins.tiff.ExifGPSTagSet;
 import com.TestSync.Model.CourseModel;
 
 public class CourseRepoImpl extends DBConfig implements CourseRepo{
-	
 	@Override
 	public Optional<List<CourseModel>> getAllCourses() {
 		 

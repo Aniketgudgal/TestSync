@@ -10,6 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.*;
 import java.io.PrintWriter;
 
+import com.TestSync.Model.StudentModel;
+import com.TestSync.Service.StudentService;
+import com.TestSync.Service.StudentServiceImp;
+
 /**
  * Servlet implementation class StudentRegisterController
  */
@@ -30,6 +34,18 @@ public class StudentRegisterController extends HttpServlet {
 			String password = request.getParameter("password");
 			int courseId = Integer.parseInt(request.getParameter("subjectId"));
 			String mobile = request.getParameter("mobile");
+			
+			StudentModel student= new StudentModel(cnt,name,email,username,password,courseId,mobile);
+			StudentService service = new StudentServiceImp();
+			boolean result = service.idAddedRecord(student);
+			if (result) {
+				out.println(
+						"<html><body><script>" + "alert('Student Registered Successfully....!'); window.location = 'StudentLogin.html</script></body></html>");
+			} else {
+
+				out.println("<html><body><script>"
+						+ "alert('Something Went Wrong....?'); window.location = 'StudentDashboard.html'</script></body></html>");
+			}
 		}
 		
 	}

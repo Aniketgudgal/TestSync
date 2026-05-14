@@ -32,6 +32,7 @@ public class ViewScheduleExam extends HttpServlet {
 		out.println("<th>Sr No</th>");
 		out.println("<th>Exam Name</th>");
 		out.println("<th>Subject Name</th>");
+		out.println("<th>Course Name</th>");
 		out.println("<th>Start Time</th>");
 		out.println("<th>End Time</th>");
 		out.println("<th>Date</th>");
@@ -53,13 +54,13 @@ public class ViewScheduleExam extends HttpServlet {
 					out.println("<td>"+(count++)+"</td>");
 					for(int i = 0; i < obj.length; i++)
 					{
-						if(i == 2 || i == 3)
+						if(i == 3 || i == 4)
 						{
 							LocalTime t = LocalTime.parse((String)obj[i]);
 							DateTimeFormatter fm = DateTimeFormatter.ofPattern("hh:mm a");
 							out.println("<td>"+t.format(fm)+"</td>");
 						}
-						else if(i == 4)
+						else if(i == 5)
 						{
 							DateTimeFormatter ip = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 							DateTimeFormatter op = DateTimeFormatter.ofPattern("dd-MM-yyyy");

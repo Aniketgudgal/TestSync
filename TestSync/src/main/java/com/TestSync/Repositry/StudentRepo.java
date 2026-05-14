@@ -7,5 +7,6 @@ import com.TestSync.Model.StudentModel;
 
 public interface StudentRepo {
 	int isRegister(StudentModel ul);
-	 
+	public boolean registerStudent(StudentModel model);
+	
 }

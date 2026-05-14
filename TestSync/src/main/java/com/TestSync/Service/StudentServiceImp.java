@@ -13,6 +13,11 @@ public class StudentServiceImp  implements StudentService{
 	public int isRegister(StudentModel ul) {
 		return sr.isRegister(ul);
 	}
+	@Override
+	public boolean idAddedRecord(StudentModel model) {
+		// TODO Auto-generated method stub
+		return sr.registerStudent(model);
+	}
 	
 	
 }

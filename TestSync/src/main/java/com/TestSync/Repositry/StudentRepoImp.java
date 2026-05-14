@@ -33,6 +33,29 @@ public class StudentRepoImp extends DBConfig implements StudentRepo{
 		return -1;
 	}
 
+	@Override
+	public boolean registerStudent(StudentModel model) {
+		try {
+			pst = conn.prepareStatement("insert into Student values('0',?,?,?,?,?,?)");
+			pst.setString(1, model.getName());
+			pst.setString(2, model.getEmail());
+			pst.setString(3, model.getUserName());
+			pst.setString(4, model.getPassword());
+			pst.setInt(5, model.getCourseId());
+			pst.setString(6, model.getMobile());
+			
+			return pst.executeUpdate() > 0 ? true : false;
+			
+		} catch(SQLException e)
+		{
+			System.out.println("Error in Repository "+e);
+			return false;
+			
+		}
+		
+		
+	}
+
 	
 
 }

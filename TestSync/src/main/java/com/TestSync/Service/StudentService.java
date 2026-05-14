@@ -8,4 +8,5 @@ import com.TestSync.Model.StudentModel;
 
 public interface StudentService {
 	public int isRegister(StudentModel ul);
+	public boolean idAddedRecord(StudentModel model);
 }

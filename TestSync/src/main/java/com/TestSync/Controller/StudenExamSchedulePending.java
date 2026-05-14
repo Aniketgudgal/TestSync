@@ -54,7 +54,7 @@ public class StudenExamSchedulePending extends HttpServlet {
 				out.println("<td>Total Questions</td>");
 				out.println("<td>Total Marks</td>");
 				out.println("<td>Exam</td>");
-				out.println("<td>Start Exam</td>");
+				out.println("<td>Attempt</td>");
 				out.println("</tr>");
 				out.println("</thead>");
 				out.println("<tbody>");
@@ -62,20 +62,28 @@ public class StudenExamSchedulePending extends HttpServlet {
 				if(!list.isEmpty())
 				{
 					int count = 1;
+					System.out.println(list);
 					for(Object[] obj: list)
 					{
 						out.println("<tr>");
 						out.println("<td>"+(count++)+"</td>");
+						int totalQ=0;
 						for(int i = 0; i < obj.length; i++)
 						{
+							if(i == obj.length-4)
+							{
+								try
+								{
+									totalQ = Integer.parseInt(obj[i].toString());
+								}catch(Exception ex)
+								{
+									System.out.println("problem to convert object string int: "+ex);
+								}
+							}
 							if(i == obj.length-1)
 							{
-								out.println("<td>");
-								System.out.println(obj[i]);
-								out.println("<form action = 'examStartController' method = 'GET'>");
-								out.println("<input type = 'hidden' id = 'examId"+obj[i]+"' name = 'es_id' value = '"+obj[i]+"'>");
-								out.println("<button type = 'submit' id = 'strt"+obj[i]+"' data-exam = '"+obj[i]+"' disabled>Start Exam</button>");
-								out.println("</form>");
+								out.println("<td class = 'p-2'>");
+								out.println("<a class  = 'btn btn-primary' href = 'examStartController?TQ="+totalQ+"&es_id="+obj[i]+"'>Start Exam</a>");
 								out.println("</td>");
 								continue;
 							}

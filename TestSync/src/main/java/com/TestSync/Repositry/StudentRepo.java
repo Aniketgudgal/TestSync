@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Optional;
 
+import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.StudentModel;
 
 public interface StudentRepo {
@@ -18,4 +19,5 @@ public interface StudentRepo {
 
 	public boolean registerStudent(StudentModel model);
 	
+	Optional<List<QuestionModel>>	getQuestions(int start, int recordPage, int es_id);
 }

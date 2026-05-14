@@ -50,57 +50,28 @@ function loadExamTime(examId){
 
 }
 
-function checkTime(examTime, examId){
-
+function checkTime(examTime, examId) {
     setInterval(() => {
-
         let now = new Date();
+        let currentTime = now.toTimeString().split(" ")[0];
 
-        let currentTime =
-            now.toTimeString().split(" ")[0];
+		console.log(currentTime);
+        let current = new Date("1970-01-01T" + currentTime);
+        let exam = new Date("1970-01-01T" + examTime);
+		console.log(exam);
+		console.log(current);
+        let btn = document.getElementById("strt" + examId);
 
-        let current =
-            new Date(
-                "1970-01-01T" + currentTime
-            );
-
-        let exam =
-            new Date(
-                "1970-01-01T" + examTime
-            );
-
-        let btn =
-            document.getElementById(
-                "strt" + examId
-            );
-
-        if(current >= exam){
-
-            btn.disabled = true;
-
-            btn.classList.remove(
-                "disable-btn"
-            );
-
-            btn.classList.add(
-                "enable-btn"
-            );
-
-        }
-        else{
-
+        if (current >= exam) {
+            // ✅ Enable button once exam time is reached
             btn.disabled = false;
-
-            btn.classList.remove(
-                "enable-btn"
-            );
-
-            btn.classList.add(
-                "disable-btn"
-            );
-
+            btn.classList.remove("disable-btn");
+            btn.classList.add("enable-btn");
+        } else {
+            // ❌ Keep disabled before exam time
+            btn.disabled = true;
+            btn.classList.remove("enable-btn");
+            btn.classList.add("disable-btn");
         }
-
     }, 1000);
-
 }

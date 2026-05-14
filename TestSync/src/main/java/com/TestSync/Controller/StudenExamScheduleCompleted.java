@@ -52,7 +52,6 @@ public class StudenExamScheduleCompleted extends HttpServlet {
 				out.println("<td>Date</td>");
 				out.println("<td>Total Questions</td>");
 				out.println("<td>Total Marks</td>");
-				out.println("<td>Exam</td>");
 				out.println("</tr>");
 				out.println("</thead>");
 				out.println("<tbody>");
@@ -64,7 +63,7 @@ public class StudenExamScheduleCompleted extends HttpServlet {
 					{
 						out.println("<tr>");
 						out.println("<td>"+(count++)+"</td>");
-						for(int i = 0; i < obj.length - 1; i++)
+						for(int i = 0; i < obj.length - 2; i++)
 						{
 							out.println("<td>"+obj[i]+"</td>");
 						}

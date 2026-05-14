@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.StudentModel;
 
 public class StudentRepoImp extends DBConfig implements StudentRepo {
@@ -39,7 +40,7 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 			while (rs.next()) {
 				al.add(new Object[] { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8),
-						rs.getInt(9) == 0 ? "Pending" : "Completed", rs.getInt(10) });
+						rs.getInt(9) == 0 ? "Pending" : "Expired", rs.getInt(10)});
 			}
 			return Optional.of(al);
 		} catch (SQLException ex) {
@@ -114,6 +115,27 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 			return false;
 			
 		}	
+	}
+
+	@Override
+	public Optional<List<QuestionModel>> getQuestions(int start, int recordPage, int es_id) {
+		try
+		{
+			List<QuestionModel> al = new ArrayList<>();
+			pst = conn.prepareStatement("select * from questions LIMIT ? , ?");
+			pst.setInt(1, start);
+			pst.setInt(2, recordPage);
+			rs = pst.executeQuery();
+			while(rs.next())
+			{
+				al.add(new QuestionModel(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+			}
+			return Optional.of(al);
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to get data: "+ex);
+		}
+		return Optional.empty();
 	}
 
 }

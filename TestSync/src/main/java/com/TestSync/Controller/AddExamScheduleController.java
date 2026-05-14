@@ -28,7 +28,7 @@ public class AddExamScheduleController extends HttpServlet {
 		String startTime = request.getParameter("startTime");
 		String Sdate = request.getParameter("Sdate");
 		String[] examId = request.getParameter("examId").split("-");
-		String courseId = request.getParameter("courseId");
+		String courseId = request.getParameter("CourId");
 		Optional<Integer> dur = Optional.empty();
 		Optional<Integer> subj = Optional.empty();
 		Optional<Integer> exId = Optional.empty();

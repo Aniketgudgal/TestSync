@@ -39,8 +39,6 @@ public class CourseController extends HttpServlet {
 				 out.println("<option value = ''>No Course Present</option>");
 			 }
 		 }
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,38 +11,32 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 
-import com.TestSync.Model.StudentModel;
 import com.TestSync.Service.AdminService;
 import com.TestSync.Service.AdminServiceImpl;
-import com.TestSync.Service.StudentService;
-import com.TestSync.Service.StudentServiceImp;
 
-/**
- * Servlet implementation class ManageStudent
- */
 @WebServlet("/managestudent")
 public class ManageStudent extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		RequestDispatcher r = request.getRequestDispatcher("AdminDashboard.html");
 		r.include(request, response);
-		out.println("<div class='container mt-4'>");
 
-		out.println("<div class='card shadow-lg'>");
-		out.println("<div class='card-header bg-dark text-white text-center'>");
-		out.println("<h4>Manage Student</h4>");
-		out.println("</div>");
+		// Container Start
+		out.println("<div class='container'>");
 
-		out.println("<div class='card-body p-0'>");
+		// Heading
+		out.println("<h2 class='text-center mb-4'>Manage Student</h2>");
 
-		out.println("<div class='table-responsive'>");
-		out.println("<table class='table table-bordered table-hover text-center mb-0'>");
+		// Table Start
+		out.println("<table class='table table-hover text-center'>");
 
-		out.println("<thead class='table-dark'>");
+		// Table Header
+		out.println("<thead class='table-primary'>");
 		out.println("<tr>");
 		out.println("<th>SR NO</th>");
 		out.println("<th>STUDENT NAME</th>");
@@ -54,28 +48,30 @@ public class ManageStudent extends HttpServlet {
 		out.println("</tr>");
 		out.println("</thead>");
 
+		// Table Body
 		out.println("<tbody>");
-		out.println("<tr>");
 
 		AdminService adminService = new AdminServiceImpl();
 		Optional<List<Object[]>> list = adminService.getAllStudents();
+
 		int count = 0;
 
 		if (list.isPresent() && !list.get().isEmpty()) {
 
 			for (Object obj[] : list.get()) {
-				System.out.println(obj);
+
 				count++;
 
 				out.println("<tr>");
 
-				out.println("<td>" + count++ + "</td>");
+				out.println("<td>" + count + "</td>");
 				out.println("<td>" + obj[0] + "</td>");
 				out.println("<td>" + obj[1] + "</td>");
 				out.println("<td>" + obj[2] + "</td>");
 				out.println("<td>" + obj[3] + "</td>");
 				out.println("<td>" + obj[4] + "</td>");
 
+				// Update Button
 				out.println("<td>");
 				out.println("<a href='#' class='btn btn-warning btn-sm'>");
 				out.println("Edit");
@@ -84,28 +80,24 @@ public class ManageStudent extends HttpServlet {
 
 				out.println("</tr>");
 			}
+
 		} else {
 
 			out.println("<tr>");
-			out.println("<td colspan='8' class='text-danger'>No Record Found</td>");
+			out.println("<td colspan='7'>No Record Found</td>");
 			out.println("</tr>");
 		}
+
 		out.println("</tbody>");
 		out.println("</table>");
-		out.println("</div>");
-		out.println("</div>");
-		out.println("</div>");
+
+		// Container End
 		out.println("</div>");
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
-
 }

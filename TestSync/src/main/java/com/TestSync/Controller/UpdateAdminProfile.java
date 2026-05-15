@@ -53,7 +53,7 @@ public class UpdateAdminProfile extends HttpServlet {
 			boolean result = adminService.updateAdminProfile(adminModel);
 			if (result) {
 				out.println("<html><body><script>"
-						+ "alert('Profile Updated Successfully....!'); window.location = 'AdminDashboard.html'</script></body></html>");
+						+ "alert('Profile Updated Successfully....!'); window.location = 'viewadmin'</script></body></html>");
 
 			} else {
 

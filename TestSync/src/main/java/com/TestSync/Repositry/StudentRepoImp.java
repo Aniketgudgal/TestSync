@@ -56,8 +56,9 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 	public Optional<List<Object[]>> getExamScheduleInfoCompleted(int id) {
 		try {
 			pst = conn.prepareStatement(
-					"select c.course_name, e.exam_name, sub.subject_name, TIME_FORMAT(es.start_time, '%h:%i %p'), TIME_FORMAT(es.end_time, '%h:%i %p'), DATE_FORMAT(es.date, '%d/%m/%Y'), e.total_questions, e.total_marks, es.attempted, es.es_id from student s inner join course c on c.course_id = s.course_id inner join examschedule es on es.course_id = c.course_id inner join subject sub on sub.subject_id = es.subject_id inner join exam e on e.exam_id = es.exam_id where es.attempted = 1 AND s.student_id = ?");
+					"select c.course_name, e.exam_name, sub.subject_name, TIME_FORMAT(es.start_time, '%h:%i %p'), TIME_FORMAT(es.end_time, '%h:%i %p'), DATE_FORMAT(es.date, '%d/%m/%Y'), e.total_questions, e.total_marks, es.attempted, es.es_id from student s inner join course c on c.course_id = s.course_id inner join examschedule es on es.course_id = c.course_id inner join subject sub on sub.subject_id = es.subject_id inner join exam e on e.exam_id = es.exam_id inner join result r on r.student_id = s.student_id where es.attempted = 1 AND s.student_id = ? AND r.student_id = ?");
 			pst.setInt(1, id);
+			pst.setInt(2, id);
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
 			while (rs.next()) {

@@ -18,6 +18,7 @@ public class ViewStudent extends HttpServlet {
 		RequestDispatcher r = request.getRequestDispatcher("StudentDashboard.html");
 		r.include(request, response);
 		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

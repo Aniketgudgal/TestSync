@@ -1,5 +1,6 @@
 package com.TestSync.Controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -39,8 +40,9 @@ public class StudentRegisterController extends HttpServlet {
 			StudentService service = new StudentServiceImp();
 			boolean result = service.idAddedRecord(student);
 			if (result) {
-				out.println(
-						"<html><body><script>" + "alert('Student Registered Successfully....!'); window.location = 'StudentLogin.html</script></body></html>");
+				out.println("<html><body><script>" + "alert('Student Registered Successfully....!');</script></body></html>");
+				RequestDispatcher r = request.getRequestDispatcher("UserLoginS");
+				r.forward(request, response);
 			} else {
 
 				out.println("<html><body><script>"

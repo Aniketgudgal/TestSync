@@ -20,7 +20,7 @@ public class AddSubjectController extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String subjName = request.getParameter("subjectName").trim();
-		out.println(subjName);
+		//out.println(subjName);
 		if(subjName != null && subjName.length() > 1)
 		{
 			SubjectModel model = new SubjectModel();

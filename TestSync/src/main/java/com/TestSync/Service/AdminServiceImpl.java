@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
+import com.TestSync.Model.CourseModel;
 import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
@@ -69,5 +70,10 @@ public class AdminServiceImpl implements AdminService{
 	public boolean updateAdminProfile(AdminModel model) {
 		// TODO Auto-generated method stub
 		return adminRepositoryImpl.isUpdatedAdminProfile(model);
+	}
+	@Override
+	public boolean addCourse(CourseModel model) {
+		// TODO Auto-generated method stub
+		return adminRepositoryImpl.addCourse(model);
 	}
 }

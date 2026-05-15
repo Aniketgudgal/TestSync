@@ -27,65 +27,50 @@ public class ViewCourse extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("AdminDashboard.html");
 		rd.include(request, response);
 
-		// Container Start
-		out.println("<div class='container'>");
-		// Table Start
-		out.println("<table class='table table-hover text-center'>");
+		CourseService courseService = new CourseServiceImpl();
+		Optional<List<CourseModel>> o = courseService.getAllCourses();
 
-		// Table Header
-		out.println("<thead class='table-primary'>");
+		out.println("<table class='table container p-2'>");
+
+		out.println("<thead class='table-primary text-center'>");
 		out.println("<tr>");
 		out.println("<th>SR NO</th>");
 		out.println("<th>COURSE NAME</th>");
 		out.println("<th>UPDATE</th>");
-		out.println("<th>DELETE</th>");
 		out.println("</tr>");
 		out.println("</thead>");
 
-		// Table Body
-		out.println("<tbody>");
-
-		CourseService courseService = new CourseServiceImpl();
-		Optional<List<CourseModel>> o = courseService.getAllCourses();
+		out.println("<tbody class='table-hover text-center'>");
 
 		if (o.isPresent()) {
 
 			List<CourseModel> list = o.get();
-			int count = 0;
 
-			if (list.isEmpty()) {
+			if (!list.isEmpty()) {
 
-				out.println("<tr>");
-				out.println("<td colspan='4'>No Record Found</td>");
-				out.println("</tr>");
-
-			} else {
+				int count = 1;
 
 				for (CourseModel model : list) {
 
-					++count;
-
 					out.println("<tr>");
 
-					out.println("<td>" + count + "</td>");
+					out.println("<td>" + (count++) + "</td>");
 					out.println("<td>" + model.getCourseName() + "</td>");
 
-					// Update Button
 					out.println("<td>");
-					out.println("<a name='update' href='#' class='btn btn-warning btn-sm'>");
-					out.println("<i class='bi bi-pencil-square'></i>");
-					out.println("</a>");
-					out.println("</td>");
-
-					// Delete Button
-					out.println("<td>");
-					out.println("<a name='delete' href='#' class='btn btn-danger btn-sm'>");
-					out.println("<i class='bi bi-trash'></i>");
+					out.println("<a href='#'>");
+					out.println("<img src='Images/icons-update.png' " + "alt='not found' width='30'>");
 					out.println("</a>");
 					out.println("</td>");
 
 					out.println("</tr>");
 				}
+
+			} else {
+
+				out.println("<tr>");
+				out.println("<td colspan='4'>No Record Found</td>");
+				out.println("</tr>");
 			}
 
 		} else {
@@ -97,9 +82,6 @@ public class ViewCourse extends HttpServlet {
 
 		out.println("</tbody>");
 		out.println("</table>");
-
-		// Container End
-		out.println("</div>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

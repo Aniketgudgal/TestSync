@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
+import com.TestSync.Model.CourseModel;
 import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
@@ -14,6 +15,7 @@ import com.TestSync.Model.SubjectModel;
 public interface AdminRepository {
 	public AdminModel isValidateAdmin(AdminModel model);
 	public boolean addSubject(SubjectModel m);
+	public boolean addCourse(CourseModel m);
 	Optional<List<SubjectModel>> getSubject();
 	boolean deleteSubject(int id);
 	boolean addExam(ExamModel m);

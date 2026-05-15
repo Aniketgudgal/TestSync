@@ -95,7 +95,7 @@ public class StudenExamSchedulePending extends HttpServlet {
 				else
 				{
 					out.println("<tr>");
-					out.println("<td colspan = '10'>No Exam Schedule</td>");
+					out.println("<td colspan = '11'>No Exam Schedule</td>");
 					out.println("</tr>");
 				}
 				out.println("</tbody>");

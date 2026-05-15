@@ -29,4 +29,5 @@ public interface StudentRepo {
 	
 	boolean addResult(ResultModel m);
 	boolean updateExamScheduleAttemp(int id); 
+	Optional<List<Object[]>> getResult(int id);
 }

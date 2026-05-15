@@ -68,4 +68,8 @@ public class StudentServiceImp  implements StudentService{
 	public boolean updateExamScheduleAttemp(int id) {
 		return sr.updateExamScheduleAttemp(id); 
 	}
+	@Override
+	public Optional<List<Object[]>> getResult(int id) {
+		return sr.getResult(id);
+	}
 }

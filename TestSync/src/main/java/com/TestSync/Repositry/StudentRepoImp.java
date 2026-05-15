@@ -269,4 +269,25 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 		return false; 
 	}
 
+	@Override
+	public Optional<List<Object[]>> getResult(int id) {
+		try
+		{
+			pst = conn.prepareStatement("select s.subject_name, e.exam_name, DATE_FORMAT(es.date,'%d/%m/%Y'), e.total_questions, e.total_marks, r.obtain_marks, r.percentage, r.status from result r inner join examschedule es on r.es_id = es.es_id inner join exam e on e.exam_id = es.exam_id inner join subject s on s.subject_id = es.subject_id where r.student_id = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			List<Object[]> al = new ArrayList<>();
+			while(rs.next())
+			{
+				al.add(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),rs.getFloat(7), rs.getInt(8) == 1 ? "Pass":"Fail"});
+			}
+			return Optional.of(al);
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to get result: "+ex);
+		}
+		return Optional.empty();
+	}
+
+
 }

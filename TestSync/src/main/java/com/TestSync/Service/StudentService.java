@@ -37,4 +37,6 @@ public interface StudentService {
 	
 	Optional<ExamModel> getExam(int id);
 	boolean updateExamScheduleAttemp(int id); 
+	
+	Optional<List<Object[]>> getResult(int id);
 }

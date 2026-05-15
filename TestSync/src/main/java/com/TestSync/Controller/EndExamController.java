@@ -48,7 +48,7 @@ public class EndExamController extends HttpServlet {
 	        	esId = Optional.of(Integer.parseInt(request.getParameter("es_id").trim()));
 	        }catch(NumberFormatException ex)
 	        {
-	        	System.out.println("result calculate problem");
+	        	System.out.println("result calculate problem: "+ex);
 	        }
 	        if (previousQid != null) {
 
@@ -163,11 +163,6 @@ public class EndExamController extends HttpServlet {
 				out.println("</body>");
 				out.println("</html>");
 	        }
-	        
-	        System.out.println("Correct Answer : "+ correctAnswer);
-	        System.out.println("Student Answer : "+ studentAnswer);
-	        System.out.println("Marks : "+ marks);
-	        
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

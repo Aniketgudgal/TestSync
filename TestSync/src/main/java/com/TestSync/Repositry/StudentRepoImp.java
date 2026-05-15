@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
+import com.TestSync.Model.ResultModel;
 import com.TestSync.Model.StudentModel;
 
 public class StudentRepoImp extends DBConfig implements StudentRepo {
@@ -136,6 +139,82 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 			System.out.println("Problem to get data: "+ex);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public boolean addResult(ResultModel m) {
+		try
+		{
+			pst = conn.prepareStatement("insert into result value('0',?,?,?,?,?)");
+			pst.setInt(1, m.getEsId());
+			pst.setInt(2, m.getStudentId());
+			pst.setInt(3, m.getObtainMarks());
+			pst.setFloat(4, m.getPercentage());
+			pst.setBoolean(5, m.isStatus());
+			return pst.executeUpdate() > 0 ? true:false;
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to add result: "+ex);
+		}
+		return false;
+	}
+
+	@Override
+	public Optional<ExamScheduleModel> getExamSchedule(int id) {
+			try
+			{
+				pst = conn.prepareStatement("select * from examschedule where es_id = ?");
+				pst.setInt(1, id);
+				rs = pst.executeQuery();
+				if(rs.next())
+				{
+					return Optional.ofNullable(new ExamScheduleModel(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+				}
+				else
+				{
+					return Optional.empty();
+				}
+			}catch(SQLException ex)
+			{
+				System.out.println("Problem to get Schedule: "+ex);
+			}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<ExamModel> getExam(int id) {
+		try
+		{
+			pst = conn.prepareStatement("select * from exam where exam_id = ?");
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			if(rs.next())
+			{
+				return Optional.of(new ExamModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
+			}
+			else
+			{
+				return Optional.empty();
+			}
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to access  exam: "+ex);
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public boolean updateExamScheduleAttemp(int id) {
+		try
+		{
+			pst = conn.prepareStatement("update examschedule set attempted = 1 where es_id = ?");
+			pst.setInt(1, id);
+			return pst.executeUpdate() > 0 ? true: false;
+		}catch(SQLException ex)
+		{
+			System.out.println("Problem to update attempt: "+ex);
+		}
+		return false;
 	}
 
 }

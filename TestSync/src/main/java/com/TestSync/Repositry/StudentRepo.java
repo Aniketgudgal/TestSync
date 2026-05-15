@@ -4,7 +4,10 @@ import java.util.List;
 
 import java.util.Optional;
 
+import com.TestSync.Model.ExamModel;
+import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
+import com.TestSync.Model.ResultModel;
 import com.TestSync.Model.StudentModel;
 
 public interface StudentRepo {
@@ -20,4 +23,10 @@ public interface StudentRepo {
 	public boolean registerStudent(StudentModel model);
 	
 	Optional<List<QuestionModel>>	getQuestions(int start, int recordPage, int es_id);
+	
+	Optional<ExamScheduleModel> getExamSchedule(int id);
+	Optional<ExamModel> getExam(int id);
+	
+	boolean addResult(ResultModel m);
+	boolean updateExamScheduleAttemp(int id);
 }

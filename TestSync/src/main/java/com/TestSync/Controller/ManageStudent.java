@@ -26,16 +26,10 @@ public class ManageStudent extends HttpServlet {
 		RequestDispatcher r = request.getRequestDispatcher("AdminDashboard.html");
 		r.include(request, response);
 
-		// Container Start
 		out.println("<div class='container'>");
 
-		// Heading
-		out.println("<h2 class='text-center mb-4'>Manage Student</h2>");
-
-		// Table Start
 		out.println("<table class='table table-hover text-center'>");
 
-		// Table Header
 		out.println("<thead class='table-primary'>");
 		out.println("<tr>");
 		out.println("<th>SR NO</th>");
@@ -48,7 +42,6 @@ public class ManageStudent extends HttpServlet {
 		out.println("</tr>");
 		out.println("</thead>");
 
-		// Table Body
 		out.println("<tbody>");
 
 		AdminService adminService = new AdminServiceImpl();
@@ -71,7 +64,6 @@ public class ManageStudent extends HttpServlet {
 				out.println("<td>" + obj[3] + "</td>");
 				out.println("<td>" + obj[4] + "</td>");
 
-				// Update Button
 				out.println("<td>");
 				out.println("<a href='#' class='btn btn-warning btn-sm'>");
 				out.println("Edit");
@@ -91,7 +83,6 @@ public class ManageStudent extends HttpServlet {
 		out.println("</tbody>");
 		out.println("</table>");
 
-		// Container End
 		out.println("</div>");
 	}
 

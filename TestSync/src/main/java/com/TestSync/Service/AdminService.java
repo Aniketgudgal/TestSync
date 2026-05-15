@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import com.TestSync.Model.AdminModel;
+import com.TestSync.Model.CourseModel;
 import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
@@ -14,6 +15,7 @@ public interface AdminService {
 	public AdminModel validateAdmin(AdminModel model);
 	 
 	public boolean addSubject(SubjectModel m);
+	public boolean addCourse(CourseModel model);
 	Optional<List<SubjectModel>> getSubject();
 	boolean deleteSubject(int id);
 	
@@ -30,5 +32,6 @@ public interface AdminService {
 	Optional<List<Object[]>> getExamSchedule();
 	
 	boolean updateAdminProfile(AdminModel model);
+	
 	
 }

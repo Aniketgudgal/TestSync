@@ -16,8 +16,9 @@ import com.TestSync.Service.AdminServiceImpl;
 
 @WebServlet("/viewExam")
 public class ViewExam extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rst = request.getRequestDispatcher("AdminDashboard.html");
@@ -36,40 +37,36 @@ public class ViewExam extends HttpServlet {
 		out.println("</thead>");
 		out.println("<tbody class = ''>");
 		AdminService as = new AdminServiceImpl();
-		
+
 		Optional<List<Object[]>> o = as.getExamWithSubject();
-		if(o.isPresent())
-		{
+		if (o.isPresent()) {
 			List<Object[]> list = o.get();
-			if(!list.isEmpty())
-			{
+			if (!list.isEmpty()) {
 				int count = 1;
-				for(Object[] obj: list)
-				{
+				for (Object[] obj : list) {
 					out.println("<tr>");
-					out.println("<td>"+(count++)+"</td>");
-					out.println("<td>"+obj[0]+"</td>");
-					out.println("<td>"+obj[1]+"</td>");
-					out.println("<td>"+obj[2]+"</td>");
-					out.println("<td>"+obj[3]+"</td>");
-					out.println("<td>"+obj[4]+"</td>");
+					out.println("<td>" + (count++) + "</td>");
+					out.println("<td>" + obj[0] + "</td>");
+					out.println("<td>" + obj[1] + "</td>");
+					out.println("<td>" + obj[2] + "</td>");
+					out.println("<td>" + obj[3] + "</td>");
+					out.println("<td>" + obj[4] + "</td>");
 					out.println("</tr>");
 				}
-			}
-			else
-			{
+			} else {
 				out.println("<tr> <td colspan = '6'>No Data Found</td></tr>");
 			}
-		}else
-		{
+		} else {
 			out.println("<tr> <td colspan = '6'>No Data Found</td></tr>");
 		}
-		
+
 		out.println("</tbody>");
 		out.println("</table>");
 		out.println("</div>");
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

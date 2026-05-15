@@ -28,4 +28,7 @@ public interface AdminService {
 	
 	boolean addExamSchedule(ExamScheduleModel model);
 	Optional<List<Object[]>> getExamSchedule();
+	
+	boolean updateAdminProfile(AdminModel model);
+	
 }

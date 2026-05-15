@@ -65,4 +65,9 @@ public class AdminServiceImpl implements AdminService{
 	public Optional<List<Object[]>> getExamSchedule() {
 		return adminRepositoryImpl.getExamSchedule();
 	}
+	@Override
+	public boolean updateAdminProfile(AdminModel model) {
+		// TODO Auto-generated method stub
+		return adminRepositoryImpl.isUpdatedAdminProfile(model);
+	}
 }

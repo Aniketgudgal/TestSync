@@ -251,4 +251,22 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			return Optional.empty();
 		}
 	}
+
+	@Override
+	public boolean isUpdatedAdminProfile(AdminModel model) {
+		// TODO Auto-generated method stub
+		try {
+			pst = conn.prepareStatement("update admin set admin_name=?,email=?,password=? where adminId=?");
+			pst.setString(1, model.getName());
+			pst.setString(2, model.getEmail());
+			pst.setString(3, model.getPassword());
+			pst.setInt(4, model.getId());
+			return pst.executeUpdate()>0? true:false;
+			
+		}
+		catch(SQLException e){
+			System.out.println("Error in Repository "+e);
+			return false;
+		} 
+	}
 }

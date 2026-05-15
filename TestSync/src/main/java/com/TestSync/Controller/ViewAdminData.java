@@ -10,15 +10,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.security.Identity;
 
-import com.TestSync.Model.AdminModel;
-import com.TestSync.Service.AdminService;
-import com.TestSync.Service.AdminServiceImpl;
-
-/**
- * Servlet implementation class ViewAdminData
- */
 @WebServlet("/viewadmin")
 public class ViewAdminData extends HttpServlet {
 
@@ -34,62 +27,58 @@ public class ViewAdminData extends HttpServlet {
 		// get admin data from session
 		HttpSession session = request.getSession();
 		String adminName = (String) session.getAttribute("adminName");
+		System.out.println(adminName);
 		String email = (String) session.getAttribute("adminEmail");
 		String password = (String) session.getAttribute("password");
+		int id = (int)session.getAttribute("adminId");
+		System.out.println("Admin Session id: "+id);
 		out.println("<div class='container mt-4'>");
 
 		out.println("<div class='card shadow-lg'>");
+
 		out.println("<div class='card-header bg-dark text-white text-center'>");
 		out.println("<h4>Admin Profile</h4>");
 		out.println("</div>");
 
-		out.println("<div class='card-body p-0'>");
+		out.println("<div class='card-body p-4'>");
 
-		out.println("<div class='table-responsive'>");
-		out.println("<table class='table table-bordered table-hover text-center mb-0'>");
+		 
+		out.println("<form action='updateadminprofile' method='GET'>");
 
-		out.println("<thead class='table-dark'>");
-		out.println("<tr>");
-		out.println("<th>ADMIN NAME</th>");
-		out.println("<th>EMAIL</th>");
-		out.println("<th>PASSWORD</th>");
-		out.println("<th>UPDATE</th>");
-		out.println("</tr>");
-		out.println("</thead>");
-
-		out.println("<tbody>");
-		out.println("<tr>");
-
-		out.println("<td>" + adminName + "</td>");
-		out.println("<td>" + email + "</td>");
-		out.println("<td>" + password + "</td>");
-
-		out.println("<td>");
-		out.println("<a href='#' class='btn btn-warning btn-sm'>");
-		out.println("Edit");
-		out.println("</a>");
-		out.println("</td>");
-
-		out.println("</tr>");
-		out.println("</tbody>");
-
-		out.println("</table>");
+		// ADMIN NAME
+		out.println("<div class='mb-3'>");
+		out.println("<label class='form-label'>Admin Name</label>");
+		out.println("<input type='text' name='adminName' class='form-control' value='" + adminName + "'  >");
 		out.println("</div>");
 
-		out.println("</div>");
-		out.println("</div>");
+		// EMAIL
+		out.println("<div class='mb-3'>");
+		out.println("<label class='form-label'>Email</label>");
+		out.println("<input type='email' name='email' class='form-control' value='" + email + "'  >");
 		out.println("</div>");
 
+		// PASSWORD
+		out.println("<div class='mb-3'>");
+		out.println("<label class='form-label'>Password</label>");
+		out.println("<input type='text' name='password' class='form-control' value='" + password + "'  >");
+		out.println("<input type='hidden' name='admin_Id' class='form-control' value='" + id + "'  >");
+		out.println("</div>");
+
+		// UPDATE BUTTON
+		out.println("<div class='text-center'>");
+		out.println("<button type = 'submit' class='btn btn-warning btn-sm px-4 py-2'>Update Profile</button>");
+		out.println("</div>");
+
+		// FORM END
+		out.println("</form>");
+
+		out.println("</div>"); // card-body
+		out.println("</div>"); // card
+		out.println("</div>"); // container
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

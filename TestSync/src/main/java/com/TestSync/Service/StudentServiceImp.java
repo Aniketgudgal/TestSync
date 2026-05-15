@@ -39,4 +39,14 @@ public class StudentServiceImp  implements StudentService{
 	public Optional<List<QuestionModel>> getQuestions(int start, int recordPage, int es_id) {
 		return sr.getQuestions(start, recordPage, es_id);
 	}
+	@Override
+	public Optional<List<Object[]>> getStudentById(int id) {
+		// TODO Auto-generated method stub
+		return sr.getStudentById(id);
+	}
+	@Override
+	public boolean updateStudentProfile(StudentModel model) {
+		// TODO Auto-generated method stub
+		return sr.isUpdatedStudentProfile(model);
+	}
 }

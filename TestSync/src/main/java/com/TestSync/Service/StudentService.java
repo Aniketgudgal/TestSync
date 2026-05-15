@@ -19,4 +19,9 @@ public interface StudentService {
 	public boolean idAddedRecord(StudentModel model);
 	
 	Optional<List<QuestionModel>>	getQuestions(int start, int recordPage, int es_id);
+	
+	Optional<List<Object[]>> getStudentById(int id);
+	
+	public boolean updateStudentProfile(StudentModel model);
+	
 }

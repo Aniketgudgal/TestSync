@@ -11,13 +11,11 @@ public interface StudentRepo {
 	int isRegister(StudentModel ul);
 	
 	Optional<List<Object[]>> getExamScheduleInfoPending(int id);
-	Optional<List<Object[]>> getExamScheduleInfoCompleted(int id);
-	
-	Optional<String> getStartTime(int id);
-	
+	Optional<List<Object[]>> getExamScheduleInfoCompleted(int id);	
+	Optional<String> getStartTime(int id);	
 	void updateAttempt();
-
-	public boolean registerStudent(StudentModel model);
-	
+	public boolean registerStudent(StudentModel model);	
 	Optional<List<QuestionModel>>	getQuestions(int start, int recordPage, int es_id);
+	Optional<List<Object[]>> getStudentById(int id);
+	public boolean isUpdatedStudentProfile(StudentModel model);
 }

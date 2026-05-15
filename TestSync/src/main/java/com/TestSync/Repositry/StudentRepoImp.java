@@ -9,7 +9,7 @@ import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.StudentModel;
 
 public class StudentRepoImp extends DBConfig implements StudentRepo {
-
+	private List<Object[]> list;
 	@Override
 	public int isRegister(StudentModel ul) {
 		try {
@@ -136,6 +136,56 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 			System.out.println("Problem to get data: "+ex);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public Optional<List<Object[]>> getStudentById(int id) {
+		 try {
+			 list = new ArrayList<>();
+			 pst = conn.prepareStatement("select st.student_name,st.email,st.username,sub.subject_name,st.mobile from student st Left join subject sub on st.course_id = sub.subject_id where st.student_id =?");
+			 pst.setInt(1, id);
+			 rs = pst.executeQuery();
+			 
+			 while(rs.next())
+			 { 
+				 Object[] obj = new Object[5];
+				 
+				 	obj[0] = rs.getString(1); // name
+		            obj[1] = rs.getString(2); // email
+		            obj[2] = rs.getString(3); // username
+		            obj[3] = rs.getString(4); // subject name
+		            obj[4] = rs.getString(5); // mobile
+				 list.add(obj);
+			 }
+			 return Optional.of(list);
+			 
+		 } catch(SQLException e)
+		 {
+			 System.out.println("Repository erro  "+e);
+			 return Optional.empty();
+		 }
+	}
+
+	@Override
+	public boolean isUpdatedStudentProfile(StudentModel model) {
+		 
+		try {
+			pst = conn.prepareStatement("update student set student_name=?,email=?,username=?,mobile=? where student_id=?");
+			pst.setString(1, model.getName());
+			pst.setString(2, model.getEmail());
+			pst.setString(3, model.getUserName());
+			pst.setString(4, model.getMobile());
+			pst.setInt(5,model.getId());			
+			
+			
+			return pst.executeUpdate()>0? true:false;
+			
+		}
+		catch(SQLException e)
+		{
+			System.out.println("error in Repository "+e);
+			return false;
+		} 
 	}
 
 }

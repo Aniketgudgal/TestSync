@@ -20,7 +20,7 @@ public interface AdminRepository {
 	
 	Optional<List<ExamModel>> getExam();
 	Optional<List<Object[]>> getExamWithSubject();
-	public Optional<List<Object[]>> getAllStudents();
+	Optional<List<Object[]>> getAllStudents();
  
 	
 	boolean addQuestion(QuestionModel model);
@@ -28,4 +28,6 @@ public interface AdminRepository {
 	
 	boolean addExamSchedule(ExamScheduleModel model);
 	Optional<List<Object[]>> getExamSchedule();
+	
+	boolean isUpdatedAdminProfile(AdminModel model);
 }

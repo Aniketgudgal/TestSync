@@ -57,6 +57,11 @@ public class StudentRegisterController extends HttpServlet {
 				 
 			}
 		}
+		else {
+			out.println("<html><body><script>"
+					+ "alert('Invalid data....!'); window.location = 'Home.html'</script></body></html>");
+			 
+		}
 
 	}
 

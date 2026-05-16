@@ -6,102 +6,92 @@ import java.util.List;
 import java.util.Optional;
 
 import com.TestSync.Model.AdminModel;
+import com.TestSync.Model.CourseModel;
 import com.TestSync.Model.ExamModel;
 import com.TestSync.Model.ExamScheduleModel;
 import com.TestSync.Model.QuestionModel;
 import com.TestSync.Model.SubjectModel;
 
-public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
+public class AdminRepositoryImpl extends DBConfig implements AdminRepository {
 	private List<Object[]> list;
+
 	@Override
-	public AdminModel isValidateAdmin(AdminModel model) { 
+	public AdminModel isValidateAdmin(AdminModel model) {
 		try {
 			pst = conn.prepareStatement("select * from admin where email = ? AND password = ?");
 			pst.setString(1, model.getEmail());
 			pst.setString(2, model.getPassword());
-			
+
 			rs = pst.executeQuery();
-			if(rs.next())
-			{
+			if (rs.next()) {
 				AdminModel adminModel = new AdminModel();
-				 adminModel.setId(rs.getInt(1));
-				 adminModel.setName(rs.getString(2));
-				 adminModel.setEmail(rs.getString(3));
-				 adminModel.setPassword(rs.getString(4));
-				 
-				 return adminModel;
+				adminModel.setId(rs.getInt(1));
+				adminModel.setName(rs.getString(2));
+				adminModel.setEmail(rs.getString(3));
+				adminModel.setPassword(rs.getString(4));
+
+				return adminModel;
 			}
-			
-		}
-		catch (SQLException e) { 
-			System.out.println("Erro is "+e);
+
+		} catch (SQLException e) {
+			System.out.println("Erro is " + e);
 		}
 		return null;
 	}
 
 	@Override
 	public boolean addSubject(SubjectModel m) {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("insert into subject values('0', ?)");
 			pst.setString(1, m.getName());
-			return pst.executeUpdate() > 0 ? true: false;
-		}
-		catch(SQLException ex)
-		{
-			System.out.println("Problem to add subject: "+ex);
+			return pst.executeUpdate() > 0 ? true : false;
+		} catch (SQLException ex) {
+			System.out.println("Problem to add subject: " + ex);
 			return false;
 		}
 	}
 
 	@Override
 	public Optional<List<SubjectModel>> getSubject() {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("select * from subject");
 			rs = pst.executeQuery();
 			List<SubjectModel> al = new ArrayList<>();
-			while(rs.next())
-			{
+			while (rs.next()) {
 				al.add(new SubjectModel(rs.getInt(1), rs.getString(2)));
 			}
 			return Optional.of(al);
-		}catch(SQLException ex)
-		{
-			System.out.println("Exception of get subject: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Exception of get subject: " + ex);
 			return Optional.empty();
 		}
 	}
 
 	@Override
 	public boolean deleteSubject(int id) {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("delete from subject where subject_id = ?");
 			pst.setInt(1, id);
-			return pst.executeUpdate() > 0 ?  true : false;
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to delete subject: "+ex);
+			return pst.executeUpdate() > 0 ? true : false;
+		} catch (SQLException ex) {
+			System.out.println("Problem to delete subject: " + ex);
 			return false;
 		}
-		
+
 	}
 
 	@Override
 	public boolean addExam(ExamModel m) {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("insert into exam values('0', ?, ?, ?, ?, ?)");
 			pst.setString(1, m.getExamName());
 			pst.setInt(2, m.getSubjectId());
 			pst.setInt(3, m.getTotalQuestions());
 			pst.setInt(4, m.getTotalMarks());
 			pst.setInt(5, m.getExamDuration());
-			return pst.executeUpdate() > 0 ? true:false;
-			
-		}catch(SQLException ex)
-		{
+			return pst.executeUpdate() > 0 ? true : false;
+
+		} catch (SQLException ex) {
 			System.out.println("Exception to add exam");
 			return false;
 		}
@@ -109,42 +99,38 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 
 	@Override
 	public Optional<List<ExamModel>> getExam() {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("select * from exam");
 			rs = pst.executeQuery();
 			List<ExamModel> m = new ArrayList<>();
-			while(rs.next())
-			{
-				m.add(new  ExamModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
+			while (rs.next()) {
+				m.add(new ExamModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),
+						rs.getInt(6)));
 			}
 			return Optional.of(m);
-		}catch(SQLException ex)
-		{
-			System.out.println("Exception to get exam details: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Exception to get exam details: " + ex);
 			return Optional.empty();
 		}
 	}
 
 	@Override
 	public Optional<List<Object[]>> getExamWithSubject() {
-		try
-		{
-			pst = conn.prepareStatement("select e.exam_name, s.subject_name, e.total_questions, e.total_marks, e.exam_duration from exam e inner join subject s on e.subject_id = s.subject_id");
+		try {
+			pst = conn.prepareStatement(
+					"select e.exam_name, s.subject_name, e.total_questions, e.total_marks, e.exam_duration from exam e inner join subject s on e.subject_id = s.subject_id");
 			List<Object[]> al = new ArrayList<>();
 			rs = pst.executeQuery();
-			while(rs.next())
-			{
-				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5)});				
+			while (rs.next()) {
+				al.add(new Object[] { rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5) });
 			}
 			return Optional.of(al);
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to get Data: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Problem to get Data: " + ex);
 			return Optional.empty();
 		}
 	}
-	
+
 	@Override
 	public Optional<List<Object[]>> getAllStudents() {
 		 try {
@@ -170,13 +156,12 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			 System.out.println("Repository erro  "+e);
 			 return Optional.empty();
 		 }
-		
+
 	}
 
 	@Override
 	public boolean addQuestion(QuestionModel model) {
-		try
-		{
+		try {
 			pst = conn.prepareStatement("insert into questions value('0', ? , ?, ?, ?, ?, ?, ?)");
 			pst.setInt(1, model.getExamId());
 			pst.setString(2, model.getQuestionText());
@@ -186,68 +171,64 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			pst.setString(6, model.getOp4());
 			pst.setString(7, model.getCorrectOp());
 			return pst.executeUpdate() > 0 ? true : false;
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to add question: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Problem to add question: " + ex);
 			return false;
 		}
 	}
 
 	@Override
 	public Optional<List<Object[]>> getQuestion() {
-		try
-		{
-			pst = conn.prepareStatement("select e.exam_name, q.question_text, q.option1, q.option2, q.option3, q.option4, q.correct_answer from questions q inner join exam e on e.exam_id = q.exam_id");
+		try {
+			pst = conn.prepareStatement(
+					"select e.exam_name, q.question_text, q.option1, q.option2, q.option3, q.option4, q.correct_answer from questions q inner join exam e on e.exam_id = q.exam_id");
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
-			
-			while(rs.next())
-			{
-				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)});
+
+			while (rs.next()) {
+				al.add(new Object[] { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7) });
 			}
 			return Optional.of(al);
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to get Data of question: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Problem to get Data of question: " + ex);
 			return Optional.empty();
 		}
 	}
 
 	@Override
 	public boolean addExamSchedule(ExamScheduleModel model) {
-		try
-		{
-			pst = conn.prepareStatement("insert into examschedule(exam_id, subject_id, start_time, end_time, date, course_id) values(?, ?, ?, ?, ?,?)");
+		try {
+			pst = conn.prepareStatement(
+					"insert into examschedule(exam_id, subject_id, start_time, end_time, date, course_id) values(?, ?, ?, ?, ?,?)");
 			pst.setInt(1, model.getExamId());
 			pst.setInt(2, model.getSubjectId());
 			pst.setString(3, model.getStartTime());
 			pst.setString(4, model.getEndTime());
 			pst.setString(5, model.getDate());
 			pst.setInt(6, model.getCourseId());
-			
-			return pst.executeUpdate() > 0 ? true: false;
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to add exam schedule: "+ex);
+
+			return pst.executeUpdate() > 0 ? true : false;
+		} catch (SQLException ex) {
+			System.out.println("Problem to add exam schedule: " + ex);
 			return false;
 		}
 	}
 
 	@Override
 	public Optional<List<Object[]>> getExamSchedule() {
-		try
-		{
-			pst = conn.prepareStatement("select e.exam_name, s.subject_name, c.course_name, es.start_time, es.end_time, es.date from examschedule es inner join exam e on e.exam_id = es.exam_id inner join subject s on s.subject_id = es.subject_id inner join course c on c.course_id = es.course_id");
+		try {
+			pst = conn.prepareStatement(
+					"select e.exam_name, s.subject_name, c.course_name, es.start_time, es.end_time, es.date from examschedule es inner join exam e on e.exam_id = es.exam_id inner join subject s on s.subject_id = es.subject_id inner join course c on c.course_id = es.course_id");
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
-			while(rs.next())
-			{
-				al.add(new Object[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+			while (rs.next()) {
+				al.add(new Object[] { rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6) });
 			}
 			return Optional.of(al);
-		}catch(SQLException ex)
-		{
-			System.out.println("Problem to get Data for schedule: "+ex);
+		} catch (SQLException ex) {
+			System.out.println("Problem to get Data for schedule: " + ex);
 			return Optional.empty();
 		}
 	}
@@ -261,12 +242,26 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 			pst.setString(2, model.getEmail());
 			pst.setString(3, model.getPassword());
 			pst.setInt(4, model.getId());
-			return pst.executeUpdate()>0? true:false;
-			
-		}
-		catch(SQLException e){
-			System.out.println("Error in Repository "+e);
+			return pst.executeUpdate() > 0 ? true : false;
+
+		} catch (SQLException e) {
+			System.out.println("Error in Repository " + e);
 			return false;
-		} 
+		}
+	}
+
+	@Override
+	public boolean addCourse(CourseModel m) {
+		// TODO Auto-generated method stub
+		try {
+			pst = conn.prepareStatement("insert into course values('0',?)");
+			pst.setString(1, m.getCourseName());
+
+			return pst.executeUpdate() > 0 ? true : false;
+
+		} catch (SQLException e) {
+			System.out.println("Error in repository " + e);
+		}
+		return false;
 	}
 }

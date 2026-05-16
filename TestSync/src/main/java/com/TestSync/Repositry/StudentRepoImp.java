@@ -35,8 +35,8 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 	@Override
 	public Optional<List<Object[]>> getExamScheduleInfoPending(int id) {
 		try {
-			pst = conn.prepareStatement(
-					"select c.course_name, e.exam_name, sub.subject_name, TIME_FORMAT(es.start_time, '%h:%i %p'), TIME_FORMAT(es.end_time, '%h:%i %p'), DATE_FORMAT(es.date, '%d/%m/%Y'), e.total_questions, e.total_marks, es.attempted, es.es_id from student s inner join course c on c.course_id = s.course_id inner join examschedule es on es.course_id = c.course_id inner join subject sub on sub.subject_id = es.subject_id inner join exam e on e.exam_id = es.exam_id where es.attempted = 0 AND s.student_id = ?");
+			pst = conn.prepareStatement("select c.course_name, e.exam_name, sub.subject_name, TIME_FORMAT(es.start_time, '%h:%i %p'), TIME_FORMAT(es.end_time, '%h:%i %p'), DATE_FORMAT(es.date, '%d/%m/%Y'), e.total_questions, e.total_marks, es.attempted, es.es_id from student s inner join course c on c.course_id = s.course_id inner join examschedule es on es.course_id = c.course_id inner join subject sub on sub.subject_id = es.subject_id inner join exam e on e.exam_id = es.exam_id where es.attempted = 0 and s.student_id = ? and NOT EXISTS (select 1  from result r where r.student_id = s.student_id and r.es_id = es.es_id)");
+					//"select c.course_name, e.exam_name, sub.subject_name, TIME_FORMAT(es.start_time, '%h:%i %p'), TIME_FORMAT(es.end_time, '%h:%i %p'), DATE_FORMAT(es.date, '%d/%m/%Y'), e.total_questions, e.total_marks, es.attempted, es.es_id from student s inner join course c on c.course_id = s.course_id inner join examschedule es on es.course_id = c.course_id inner join subject sub on sub.subject_id = es.subject_id inner join exam e on e.exam_id = es.exam_id where es.attempted = 0 AND s.student_id = ?");
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			List<Object[]> al = new ArrayList<>();
@@ -147,7 +147,7 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 	public Optional<List<Object[]>> getStudentById(int id) {
 		 try {
 			 list = new ArrayList<>();
-			 pst = conn.prepareStatement("select st.student_name,st.email,st.username,sub.subject_name,st.mobile from student st Left join subject sub on st.course_id = sub.subject_id where st.student_id =?");
+			 pst = conn.prepareStatement("select st.student_name,st.email,st.username, c.course_name, st.mobile from student st inner join course c on st.course_id = c.course_id where st.student_id =?");
 			 pst.setInt(1, id);
 			 rs = pst.executeQuery();
 			 

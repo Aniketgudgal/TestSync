@@ -149,7 +149,7 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 	public Optional<List<Object[]>> getAllStudents() {
 		 try {
 			 list = new ArrayList<>();
-			 pst = conn.prepareStatement("select st.student_name,st.email,st.username,sub.subject_name,st.mobile from student st Left join subject sub on st.course_id = sub.subject_id");
+			 pst = conn.prepareStatement("select st.student_name,st.email,st.username,c.course_name ,st.mobile from student st Left join course c on st.course_id = c.course_id");
 			 rs = pst.executeQuery();
 			 
 			 while(rs.next())
@@ -159,7 +159,7 @@ public class AdminRepositoryImpl extends DBConfig implements AdminRepository{
 				 	obj[0] = rs.getString(1); // name
 		            obj[1] = rs.getString(2); // email
 		            obj[2] = rs.getString(3); // username
-		            obj[3] = rs.getString(4); // subject name
+		            obj[3] = rs.getString(4); // course
 		            obj[4] = rs.getString(5); // mobile
 				 list.add(obj);
 			 }

@@ -27,11 +27,9 @@ public class ViewAdminData extends HttpServlet {
 		// get admin data from session
 		HttpSession session = request.getSession();
 		String adminName = (String) session.getAttribute("adminName");
-		System.out.println(adminName);
 		String email = (String) session.getAttribute("adminEmail");
 		String password = (String) session.getAttribute("password");
 		int id = (int)session.getAttribute("adminId");
-		System.out.println("Admin Session id: "+id);
 		out.println("<div class='container mt-4'>");
 
 		out.println("<div class='card shadow-lg'>");

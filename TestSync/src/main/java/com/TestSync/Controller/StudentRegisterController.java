@@ -15,9 +15,6 @@ import com.TestSync.Model.StudentModel;
 import com.TestSync.Service.StudentService;
 import com.TestSync.Service.StudentServiceImp;
 
-/**
- * Servlet implementation class StudentRegisterController
- */
 @WebServlet("/registerstudent")
 public class StudentRegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -87,13 +87,12 @@ public class EndExamController extends HttpServlet {
 	        		Optional<ExamModel> ex = ss.getExam(o.get().getExamId());
 	        		if(ex.isPresent())
 	        		{
-	        			double percentage = (marks*100.0)/ex.get().getTotalQuestions();
-	        			ResultModel rm = new ResultModel(0, esId.get(), studentId.get(),marks, (float)percentage, percentage > 36 ? true:false);
+	        			int obtainMarks = (marks*ex.get().getTotalMarks()) /ex.get().getTotalQuestions();
+	        			double percentage = (obtainMarks*100.0)/ex.get().getTotalMarks();
+	        			ResultModel rm = new ResultModel(0, esId.get(), studentId.get(),obtainMarks, (float)percentage, percentage > 36 ? true:false);
 	        			boolean result = ss.addResult(rm);
 	        			if(result)
 	        			{
-	        				if(ss.updateExamScheduleAttemp(esId.get()))
-	        				{
 	        					out.println("<html>");
 								out.println("<body>");
 								out.println("<script>");
@@ -102,18 +101,6 @@ public class EndExamController extends HttpServlet {
 								out.println("</script>");
 								out.println("</body>");
 								out.println("</html>");
-	        				}
-	        				else
-	        				{
-	        					out.println("<html>");
-								out.println("<body>");
-								out.println("<script>");
-								out.println("alert('Contact to Admin');");
-								out.println("window.location = 'StudentDashboard.html'");
-								out.println("</script>");
-								out.println("</body>");
-								out.println("</html>");
-	        				}
 	        			}
 	        			else
 	        			{

@@ -105,7 +105,7 @@ public class ExamStartController extends HttpServlet {
 
         out.println("<div>");
 
-        out.println("<form action='examStartController' method='GET'>");
+        out.println("<form action='examStartController' method='POST'>");
 
         if (list.get().isEmpty()) {
 

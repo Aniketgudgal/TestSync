@@ -92,13 +92,12 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 	public void updateAttempt() {
 		try {
 
-			pst = conn.prepareStatement("UPDATE examschedule SET attempted = 1  WHERE date = CURDATE() AND end_time <= CURTIME()");
+			pst = conn.prepareStatement("UPDATE examschedule SET attempted = 1 WHERE date = CURDATE() AND end_time <= CURTIME() AND attempted = 0");
 			pst.executeUpdate();
 
 		} catch (SQLException ex) {
 
-			System.out.println(ex);
-
+			System.out.println("Problem to update schedule: "+ex);
 		}
 	}
 	public boolean registerStudent(StudentModel model) {
@@ -158,7 +157,7 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 				 	obj[0] = rs.getString(1); // name
 		            obj[1] = rs.getString(2); // email
 		            obj[2] = rs.getString(3); // username
-		            obj[3] = rs.getString(4); // subject name
+		            obj[3] = rs.getString(4); // course
 		            obj[4] = rs.getString(5); // mobile
 				 list.add(obj);
 			 }
@@ -181,7 +180,6 @@ public class StudentRepoImp extends DBConfig implements StudentRepo {
 			pst.setString(3, model.getUserName());
 			pst.setString(4, model.getMobile());
 			pst.setInt(5,model.getId());			
-			
 			
 			return pst.executeUpdate()>0? true:false;
 			

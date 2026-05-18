@@ -9,9 +9,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-/**
- * Servlet implementation class GetStudentSessionData
- */
 @WebServlet("/getstudentsession")
 public class GetStudentSessionData extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

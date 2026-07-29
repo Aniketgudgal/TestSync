@@ -25,7 +25,7 @@ public class SessionLogoutController extends HttpServlet {
 			session.invalidate();
 		}
 		
-		response.sendRedirect("Home.html");
+		response.sendRedirect("index.html");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

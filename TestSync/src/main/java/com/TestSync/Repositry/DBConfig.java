@@ -17,10 +17,11 @@ public class DBConfig {
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlineexamdb","root","Pass@12345");
+			System.out.println("database connected successfully");
 		}
 		catch(Exception ex)
 		{
-			System.out.println("problem to make connection: "+ex);
+			ex.printStackTrace();
 		}
 	}
 }
